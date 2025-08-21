@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIDI - Business Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with centered toggle -->
+        <header class="header">
+            <div class="theme-toggle-container" id="themeToggle">
+                <div class="toggle-track">
+                    <div class="toggle-thumb"></div>
+                    <div class="toggle-icon dark-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="toggle-icon light-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <div class="brand-text">
+
+                <span style="background: linear-gradient(45deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">🚀 Currently in Beta</span>
+            </div>
+
+            <h1 class="main-heading">
+                Small Business, Big Intelligence <br> with CHIDI.
+            </h1>
+
+            <p class="subtitle">
+                Unlock the potential of CHIDI, your ultimate business companion for streamlining inventory management, automating customer service, and delivering personalized business insights to help you grow smarter.
+
+            <div class="waitlist-section">
+                <button class="waitlist-btn" id="waitlistBtn">
+                    Join our waitlist
+                </button>
+            </div>
+
+            <div class="trust-indicators">
+                <div class="avatar-group">
+                    <div class="avatar">
+                        <img src="assets/gamer.png" alt="User Avatar" />
+                    </div>
+                    <div class="avatar">
+                        <img src="assets/woman.png" alt="Woman Avatar" />
+                    </div>
+                    <div class="avatar">
+                        <img src="assets/user.png" alt="User Avatar" />
+                    </div>
+                </div>
+                <span class="trust-text">Join <span id="waitlistCount" class="dynamic-counter" style="font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px;">154</span> entrepreneurs getting exclusive early access</span>
+            </div>
+        </main>
+
+        <!-- Feature cards -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="assets/chat.gif" alt="24/7 Instant Response" />
+                </div>
+                <h3>24/7 Instant Response</h3>
+                <p>Never miss another sale due to delayed responses</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="assets/warehouse.gif" alt="Inventory on Autopilot" />
+                </div>
+                <h3>Inventory on Autopilot</h3>
+                <p>Tracks stock, alerts on low inventory, updates across all platforms</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="assets/forum.gif" alt="WhatsApp + Instagram Integration" />
+                </div>
+                <h3>WhatsApp + Instagram Integration</h3>
+                <p>Manage all conversations from one dashboard</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="assets/artificial-intelligence.gif" alt="Smart Recommendations" />
+                </div>
+                <h3>Smart Recommendations</h3>
+                <p>Get recommendations based on your actual business data, not generic advice</p>
+            </div>
+
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
