@@ -1,38 +1,5 @@
-// Waitlist button handling
+// Main application functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const waitlistBtn = document.getElementById('waitlistBtn');
-    
-    // Waitlist button click
-    waitlistBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Simulate waitlist join process
-        waitlistBtn.disabled = true;
-        waitlistBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin" style="margin-right: 8px;">
-                <path d="M21 12a9 9 0 11-6.219-8.56" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Joining waitlist...
-        `;
-        
-        setTimeout(() => {
-            waitlistBtn.disabled = false;
-            waitlistBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
-                    <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                You're on the list!
-            `;
-            
-            showNotification('Welcome to the waitlist! We\'ll notify you when CHIDI is ready.', 'success');
-            
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                waitlistBtn.innerHTML = 'Join our waitlist';
-            }, 3000);
-            
-        }, 2000);
-    });
     
     // Email validation
     function isValidEmail(email) {
@@ -68,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Theme toggle functionality
     const toggleContainer = document.querySelector('.theme-toggle-container');
-    let isDarkMode = true; // Start with dark mode active
+    let isDarkMode = false; // Start with dark mode active
     
     toggleContainer.addEventListener('click', function() {
         isDarkMode = !isDarkMode;
@@ -79,6 +46,110 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             document.body.classList.remove('dark-mode');
             toggleContainer.classList.add('light-mode');
+        }
+    });
+    
+    // Modal functionality
+    const waitlistModal = document.getElementById('waitlistModal');
+    const successModal = document.getElementById('successModal');
+    const waitlistBtn = document.getElementById('waitlistBtn');
+    const closeModal = document.getElementById('closeModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    const waitlistForm = document.getElementById('waitlistForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+    const waitlistCount = document.getElementById('waitlistCount');
+    const userPosition = document.getElementById('userPosition');
+
+    waitlistCount.textContent = 250;
+    
+    
+    // Open modal when waitlist button is clicked
+    waitlistBtn.addEventListener('click', function() {
+        waitlistModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close modal functions
+    function closeWaitlistModal() {
+        waitlistModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        waitlistForm.reset();
+    }
+    
+    function closeSuccessModalFunc() {
+        successModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    closeModal.addEventListener('click', closeWaitlistModal);
+    closeSuccessModal.addEventListener('click', closeSuccessModalFunc);
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === waitlistModal) {
+            closeWaitlistModal();
+        }
+        if (event.target === successModal) {
+            closeSuccessModalFunc();
+        }
+    });
+    
+    // Form submission
+    waitlistForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'block';
+        
+        const formData = new FormData(waitlistForm);
+        const data = {
+            email: formData.get('email'),
+            businessName: formData.get('businessName'),
+            businessCategory: formData.get('businessCategory'),
+            timestamp: new Date().toISOString()
+        };
+        
+        try {
+            // Use form data for Google Apps Script
+            const formDataToSend = new FormData();
+            formDataToSend.append('email', data.email);
+            formDataToSend.append('businessName', data.businessName);
+            formDataToSend.append('businessCategory', data.businessCategory);
+            formDataToSend.append('timestamp', data.timestamp);
+            
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxJ4WeklWeTnO-kycptYK1dyGVcfbMSRWakedLurS1pSHueaq3TIluwUl2WpQosT2Bl/exec', {
+                method: 'POST',
+                body: formDataToSend
+            });
+            
+            if (response.ok) {
+                //const result = await response.json();
+                
+                // Update waitlist count
+                const currentCount = parseInt(waitlistCount.textContent);
+                const newCount = currentCount + 1;
+                waitlistCount.textContent = newCount;
+                userPosition.textContent = newCount;
+                
+                // Close waitlist modal and show success modal
+                closeWaitlistModal();
+                successModal.style.display = 'block';
+                
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('Something went wrong. Please try again.', 'error');
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            btnText.style.display = 'block';
+            btnLoader.style.display = 'none';
         }
     });
     

@@ -11,7 +11,7 @@
     <div class="container">
         <!-- Header with centered toggle -->
         <header class="header">
-            <div class="theme-toggle-container" id="themeToggle">
+            <div class="theme-toggle-container light-mode" id="themeToggle">
                 <div class="toggle-track">
                     <div class="toggle-thumb"></div>
                     <div class="toggle-icon dark-icon">
@@ -33,11 +33,11 @@
         <main class="main-content">
             <div class="brand-text">
 
-                <span style="background: linear-gradient(45deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">🚀 Currently in Beta</span>
+                <span style="background: linear-gradient(45deg, rgb(0, 94, 255),#11d4f7, #961cec); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">🚀 Currently in Beta</span>
             </div>
 
             <h1 class="main-heading">
-                Small Business, Big Intelligence <br> with CHIDI.
+                Small Business, Big Intelligence<br class="large-break"> with<br class="mobile-break"> CHIDI.
             </h1>
 
             <p class="subtitle">
@@ -61,7 +61,7 @@
                         <img src="assets/user.png" alt="User Avatar" />
                     </div>
                 </div>
-                <span class="trust-text">Join <span id="waitlistCount" class="dynamic-counter" style="font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px;">154</span> entrepreneurs getting exclusive early access</span>
+                <span class="trust-text">Join <span id="waitlistCount" class="dynamic-counter" style="font-weight: 700; color: linear-gradient(45deg, rgb(0, 94, 255),#11d4f7, #961cec); background: rgba(152, 154, 154, 0.1); padding: 2px 8px; border-radius: 4px;"></span> entrepreneurs getting exclusive early access</span>
             </div>
         </main>
 
@@ -102,6 +102,78 @@
         </section>
     </div>
 
+    <!-- Waitlist Modal -->
+    <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Join the CHIDI Waitlist</h2>
+                <span class="close-btn" id="closeModal">&times;</span>
+            </div>
+            <form id="waitlistForm" class="waitlist-form">
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="businessName">Business Name *</label>
+                    <input type="text" id="businessName" name="businessName" required placeholder="Your Business Name">
+                </div>
+                <div class="form-group">
+                    <label for="businessCategory">Business Category *</label>
+                    <select id="businessCategory" name="businessCategory" required>
+                        <option value="">Select your business category</option>
+                        <option value="fashion-retail">Fashion Retail</option>
+                        <option value="food-beverage">Food and Beverage</option>
+                        <option value="devices-electronics">Devices and Electronics</option>
+                        <option value="home-appliances">Home Appliances</option>
+                        <option value="general-retail">General Retail</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Join Waitlist</span>
+                    <div class="btn-loader" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin">
+                            <path d="M21 12a9 9 0 11-6.219-8.56" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="#10b981"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="close-success-btn" id="closeSuccessModal">&times;</span>
+
+            <h2>Smart Decision! 🎉</h2>
+
+            <img src="assets/tkt-smart.gif" alt="Smart" style="width: 250px; height: 200px;" />
+
+            <p>You're now part of an exclusive group of forward-thinking entrepreneurs.</p>
+            <div class="waitlist-position">
+                You are <strong>#<span id="userPosition">155</span></strong> on the waitlist
+            </div>
+            
+        </div>
+    </div>
+
     <script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 CHIDI. All rights reserved.</p>
+            <p>Contact: <a href="mailto:mailsheriff.mo@gmail.com">hey@chidi.app</a></p>
+        </div>
+    </footer>
+
 </body>
 </html>
