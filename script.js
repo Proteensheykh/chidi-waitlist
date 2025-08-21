@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formDataToSend.append('businessCategory', data.businessCategory);
             formDataToSend.append('timestamp', data.timestamp);
             
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxJ4WeklWeTnO-kycptYK1dyGVcfbMSRWakedLurS1pSHueaq3TIluwUl2WpQosT2Bl/exec', {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec', {
                 method: 'POST',
                 body: formDataToSend
             });
