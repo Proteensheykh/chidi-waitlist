@@ -103,6 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
         btnLoader.style.display = 'block';
         
         const formData = new FormData(waitlistForm);
+        if (!isValidEmail(formData.get('email'))) {
+            showNotification('Please enter a valid email address', 'error');
+            submitBtn.disabled = false;
+            btnText.style.display = 'block';
+            btnLoader.style.display = 'none';
+            return;
+        }
+        
         const data = {
             email: formData.get('email'),
             businessName: formData.get('businessName'),
