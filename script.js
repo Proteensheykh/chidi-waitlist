@@ -102,65 +102,58 @@ document.addEventListener('DOMContentLoaded', function() {
         btnText.style.display = 'none';
         btnLoader.style.display = 'block';
         
-        // Create FormData directly from the form
         const formData = new FormData(waitlistForm);
-        // Add timestamp
-        formData.append('timestamp', new Date().toISOString());
+        const data = {
+            email: formData.get('email'),
+            businessName: formData.get('businessName'),
+            businessCategory: formData.get('businessCategory'),
+            timestamp: new Date().toISOString()
+        };
         
         try {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec';
+            // Use FormData to avoid CORS preflight requests
+            const formDataToSend = new FormData();
+            formDataToSend.append('email', data.email);
+            formDataToSend.append('businessName', data.businessName);
+            formDataToSend.append('businessCategory', data.businessCategory);
+            formDataToSend.append('timestamp', data.timestamp);
             
-            const response = await fetch(scriptURL, {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxJ4WeklWeTnO-kycptYK1dyGVcfbMSRWakedLurS1pSHueaq3TIluwUl2WpQosT2Bl/exec', {
                 method: 'POST',
-                body: formData
+                body: formDataToSend
             });
+
+            console.log(response);
             
             if (response.ok) {
+                // Let's try to get the response text to see what's actually being returned
                 const responseText = await response.text();
                 
+                // Try to parse as JSON if possible
                 try {
                     const result = JSON.parse(responseText);
                     
-                    if (result.success || result.result === 'success') {
-                        // Update waitlist count and user position
-                        const currentCount = parseInt(waitlistCount.textContent);
-                        const newCount = currentCount + 1;
-                        waitlistCount.textContent = newCount;
-                        userPosition.textContent = result.position || newCount;
-                        
-                        // Save updated count to localStorage
-                        localStorage.setItem('waitlistCount', newCount.toString());
+                    if (result.success) {
+                        // Use the position returned from Google Apps Script
+                        const newCount = result.position;
+                        waitlistCount.textContent = parseInt(waitlistCount.textContent) + 1;
+                        userPosition.textContent = newCount;
                         
                         // Close waitlist modal and show success modal
                         closeWaitlistModal();
                         successModal.style.display = 'block';
-                        showNotification('Successfully joined the waitlist!', 'success');
                     } else {
                         throw new Error(result.error || 'Submission failed');
                     }
                 } catch (jsonError) {
-                    // If response is not JSON but request was successful, assume success
-                    if (response.status === 200) {
-                        const currentCount = parseInt(waitlistCount.textContent);
-                        const newCount = currentCount + 1;
-                        waitlistCount.textContent = newCount;
-                        userPosition.textContent = newCount;
-                        
-                        // Save updated count to localStorage
-                        localStorage.setItem('waitlistCount', newCount.toString());
-                        
-                        closeWaitlistModal();
-                        successModal.style.display = 'block';
-                        showNotification('Successfully joined the waitlist!', 'success');
-                    } else {
-                        throw new Error('Invalid response format');
-                    }
+                    console.log('Response is not JSON:', jsonError);
+                    throw new Error('Invalid response format');
                 }
             } else {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                throw new Error('Submission failed');
             }
         } catch (error) {
-            console.error('Submission error:', error);
+            console.error('Error:', error);
             showNotification('Something went wrong. Please try again.', 'error');
         } finally {
             // Reset button state
