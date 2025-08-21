@@ -61,62 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnLoader = submitBtn.querySelector('.btn-loader');
     const waitlistCount = document.getElementById('waitlistCount');
     const userPosition = document.getElementById('userPosition');
-
-    // Function to fetch current waitlist count
-    async function fetchWaitlistCount() {
-        try {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec';
-            
-            // Use POST with FormData to avoid CORS issues
-            const formData = new FormData();
-            formData.append('action', 'getCount');
-            
-            const response = await fetch(scriptURL, {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (response.ok) {
-                const responseText = await response.text();
-                try {
-                    const result = JSON.parse(responseText);
-                    if (result.success) {
-                        console.log('Count result:', result.count);
-                        return result.count + 250 || 250;
-                    }
-                } catch (jsonError) {
-                    console.error('Error parsing count response:', jsonError);
-                }
-            }
-        } catch (error) {
-            console.error('Error fetching waitlist count:', error);
-        }
-        
-        // Return default count if fetch fails
-        return 250;
-    }
-    
-    // Initialize waitlist count on page load
-    async function initializeWaitlistCount() {
-        const count = await fetchWaitlistCount();
-        const waitlistCount = document.getElementById('waitlistCount');
-        if (waitlistCount) {
-            waitlistCount.textContent = count;
-        }
-    }
-    
-    // Call initialization on DOM ready
-    initializeWaitlistCount();
-    
-    // Also call on window load (covers refresh scenarios)
-    window.addEventListener('load', initializeWaitlistCount);
-    
-    // Call when page becomes visible (covers tab switching)
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden) {
-            initializeWaitlistCount();
-        }
-    });
     
     // Open modal when waitlist button is clicked
     waitlistBtn.addEventListener('click', function() {
@@ -164,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('timestamp', new Date().toISOString());
         
         try {
-            // Replace with your actual Google Apps Script URL
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec';
             
             const response = await fetch(scriptURL, {
@@ -174,33 +117,37 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (response.ok) {
                 const responseText = await response.text();
-                console.log('Response text:', responseText);
                 
                 try {
                     const result = JSON.parse(responseText);
-                    console.log('Parsed JSON result:', result);
                     
                     if (result.success || result.result === 'success') {
                         // Update waitlist count and user position
                         const currentCount = parseInt(waitlistCount.textContent);
-                        waitlistCount.textContent = currentCount + 1;
-                        userPosition.textContent = result.position || currentCount + 1;
+                        const newCount = currentCount + 1;
+                        waitlistCount.textContent = newCount;
+                        userPosition.textContent = result.position || newCount;
+                        
+                        // Save updated count to localStorage
+                        localStorage.setItem('waitlistCount', newCount.toString());
                         
                         // Close waitlist modal and show success modal
                         closeWaitlistModal();
                         successModal.style.display = 'block';
-                        
                         showNotification('Successfully joined the waitlist!', 'success');
                     } else {
                         throw new Error(result.error || 'Submission failed');
                     }
                 } catch (jsonError) {
-                    console.error('JSON parsing error:', jsonError);
                     // If response is not JSON but request was successful, assume success
                     if (response.status === 200) {
                         const currentCount = parseInt(waitlistCount.textContent);
-                        waitlistCount.textContent = currentCount + 1;
-                        userPosition.textContent = currentCount + 1;
+                        const newCount = currentCount + 1;
+                        waitlistCount.textContent = newCount;
+                        userPosition.textContent = newCount;
+                        
+                        // Save updated count to localStorage
+                        localStorage.setItem('waitlistCount', newCount.toString());
                         
                         closeWaitlistModal();
                         successModal.style.display = 'block';
