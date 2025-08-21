@@ -114,31 +114,43 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         try {
-            // Use form data for Google Apps Script
-            const formDataToSend = new FormData();
-            formDataToSend.append('email', data.email);
-            formDataToSend.append('businessName', data.businessName);
-            formDataToSend.append('businessCategory', data.businessCategory);
-            formDataToSend.append('timestamp', data.timestamp);
-            
+            // Send JSON data to match the Google Apps Script expectation
             const response = await fetch('https://script.google.com/macros/s/AKfycbxJ4WeklWeTnO-kycptYK1dyGVcfbMSRWakedLurS1pSHueaq3TIluwUl2WpQosT2Bl/exec', {
                 method: 'POST',
-                body: formDataToSend
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
             });
+
+            console.log(response);
             
             if (response.ok) {
-                //const result = await response.json();
+                // Let's try to get the response text to see what's actually being returned
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
                 
-                // Update waitlist count
-                const currentCount = parseInt(waitlistCount.textContent);
-                const newCount = currentCount + 1;
-                waitlistCount.textContent = newCount;
-                userPosition.textContent = newCount;
-                
-                // Close waitlist modal and show success modal
-                closeWaitlistModal();
-                successModal.style.display = 'block';
-                
+                // Try to parse as JSON if possible
+                try {
+                    const result = JSON.parse(responseText);
+                    console.log('Parsed JSON result:', result);
+                    
+                    if (result.success) {
+                        // Use the position returned from Google Apps Script
+                        const newCount = result.position;
+                        waitlistCount.textContent = parseInt(waitlistCount.textContent) + 1;
+                        userPosition.textContent = newCount;
+                        
+                        // Close waitlist modal and show success modal
+                        closeWaitlistModal();
+                        successModal.style.display = 'block';
+                    } else {
+                        throw new Error(result.error || 'Submission failed');
+                    }
+                } catch (jsonError) {
+                    console.log('Response is not JSON:', jsonError);
+                    throw new Error('Invalid response format');
+                }
             } else {
                 throw new Error('Submission failed');
             }
