@@ -67,8 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec';
             
+            // Use POST with FormData to avoid CORS issues
+            const formData = new FormData();
+            formData.append('action', 'getCount');
+            
             const response = await fetch(scriptURL, {
-                method: 'GET'
+                method: 'POST',
+                body: formData
             });
             
             if (response.ok) {
@@ -76,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const result = JSON.parse(responseText);
                     if (result.success) {
-                        return result.count + 250 || 0;
+                        return result.count + 250 || 250;
                     }
                 } catch (jsonError) {
                     console.error('Error parsing count response:', jsonError);
