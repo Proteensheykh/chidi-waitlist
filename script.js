@@ -140,12 +140,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Try to parse as JSON if possible
                 try {
                     const result = JSON.parse(responseText);
+                    console.log('Parsed JSON:', result);
                     
                     if (result.success) {
                         // Use the position returned from Google Apps Script
-                        const newCount = result.position;
-                        waitlistCount.textContent = parseInt(waitlistCount.textContent) + 1;
-                        userPosition.textContent = newCount;
+                        const userPositionInWaitlist = result.position;
+                        
+                        // Update the waitlist count display (increment current count)
+                        const currentCount = parseInt(waitlistCount.textContent);
+                        waitlistCount.textContent = currentCount + 1;
+                        
+                        // Set the user's position in the waitlist
+                        userPosition.textContent = userPositionInWaitlist;
                         
                         // Close waitlist modal and show success modal
                         closeWaitlistModal();
@@ -155,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 } catch (jsonError) {
                     console.log('Response is not JSON:', jsonError);
+                    console.log('Raw response:', responseText);
                     throw new Error('Invalid response format');
                 }
             } else {
