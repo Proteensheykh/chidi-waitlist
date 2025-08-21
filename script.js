@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const result = JSON.parse(responseText);
                     if (result.success) {
+                        console.log('Count result:', result.count);
                         return result.count + 250 || 250;
                     }
                 } catch (jsonError) {
@@ -104,8 +105,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Call initialization
+    // Call initialization on DOM ready
     initializeWaitlistCount();
+    
+    // Also call on window load (covers refresh scenarios)
+    window.addEventListener('load', initializeWaitlistCount);
+    
+    // Call when page becomes visible (covers tab switching)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            initializeWaitlistCount();
+        }
+    });
     
     // Open modal when waitlist button is clicked
     waitlistBtn.addEventListener('click', function() {
