@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         waitlistCount.textContent = currentCount + 1;
                         
                         // Set the user's position in the waitlist
-                        userPosition.textContent = userPositionInWaitlist;
+                        userPosition.textContent = userPositionInWaitlist + currentCount;
                         
                         // Close waitlist modal and show success modal
                         closeWaitlistModal();
