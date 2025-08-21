@@ -62,8 +62,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const waitlistCount = document.getElementById('waitlistCount');
     const userPosition = document.getElementById('userPosition');
 
-    waitlistCount.textContent = 250;
+    // Function to fetch current waitlist count
+    async function fetchWaitlistCount() {
+        try {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxSNlnI8yYL1PSPUrGDtIUyyh-LVSaVQWXjSyhMRiy7OlSGzdOOitTN6DPJ4jHnp549vg/exec';
+            
+            const response = await fetch(scriptURL, {
+                method: 'GET'
+            });
+            
+            if (response.ok) {
+                const responseText = await response.text();
+                try {
+                    const result = JSON.parse(responseText);
+                    if (result.success) {
+                        return result.count + 250 || 0;
+                    }
+                } catch (jsonError) {
+                    console.error('Error parsing count response:', jsonError);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching waitlist count:', error);
+        }
+        
+        // Return default count if fetch fails
+        return 250;
+    }
     
+    // Initialize waitlist count on page load
+    async function initializeWaitlistCount() {
+        const count = await fetchWaitlistCount();
+        const waitlistCount = document.getElementById('waitlistCount');
+        if (waitlistCount) {
+            waitlistCount.textContent = count;
+        }
+    }
+    
+    // Call initialization
+    initializeWaitlistCount();
     
     // Open modal when waitlist button is clicked
     waitlistBtn.addEventListener('click', function() {
