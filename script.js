@@ -265,7 +265,7 @@ style.textContent = `
     }
     
     body.dark-mode .feature-card h3 {
-        color: #f9fafb;
+        color: #1f2937;
     }
     
     body.dark-mode .input-group {
