@@ -114,13 +114,16 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         try {
-            // Send JSON data to match the Google Apps Script expectation
+            // Use FormData to avoid CORS preflight requests
+            const formDataToSend = new FormData();
+            formDataToSend.append('email', data.email);
+            formDataToSend.append('businessName', data.businessName);
+            formDataToSend.append('businessCategory', data.businessCategory);
+            formDataToSend.append('timestamp', data.timestamp);
+            
             const response = await fetch('https://script.google.com/macros/s/AKfycbxJ4WeklWeTnO-kycptYK1dyGVcfbMSRWakedLurS1pSHueaq3TIluwUl2WpQosT2Bl/exec', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
+                body: formDataToSend
             });
 
             console.log(response);
