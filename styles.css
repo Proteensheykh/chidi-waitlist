@@ -94,7 +94,7 @@ body {
     padding-bottom: 80px;
 }
 
-.brand-text {
+.beta-text {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -104,6 +104,29 @@ body {
     margin-bottom: 24px;
     letter-spacing: 0.025em;
 }
+
+/* .beta-text.silver {
+    align-self: center;
+    border: solid 0.625em transparent; /* 0.1 * 6.25em 
+    padding: 6px;
+    border-radius: 50px; /* 1.75 * 0.625em 
+    background: 
+      conic-gradient(
+        #e0e4eb, #c3c8d1, #cdd1d8, #bcc0c8, 
+        #d6dbe2, #e1e4ea, #d5d9e0, #c4c8cf, 
+        #d8dce3, #c9ced6, #bfc4cc, #b8bdc5, 
+        #d4d9e1, #e3e6ec, #d2d6de, #c5c9d0, 
+        #d0d4dc, #e0e4eb, #d6dae1, #cfd3db, 
+        #c4c9d0, #dfe3ea, #d1d6de, #c7ccd4, 
+        #c8cdd5, #d3d7df, #dee2e9, #e3e6ec, 
+        #dfe3ea
+      ) content-box, 
+      linear-gradient(#d4d4d4, #d4d4d4) padding-box,
+      radial-gradient(rgba(120,120,120,.9), rgba(120,120,120,0) 70%) 
+        50% bottom / 80% 0.469em no-repeat border-box; /* 0.75 * 0.625em 
+} 
+*/
+  
 
 .main-heading {
     font-size: 56px;
