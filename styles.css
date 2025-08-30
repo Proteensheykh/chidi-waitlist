@@ -586,6 +586,41 @@ body {
     color: #059669;
 }
 
+/* Social Media Links */
+.social-links {
+    margin-top: 16px;
+}
+
+.social-links p {
+    margin-bottom: 8px;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 50%;
+    color: #10b981;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+}
+
 @media (max-width: 480px) {
     .modal-content {
         margin: 10% auto;
