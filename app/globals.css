@@ -1,0 +1,343 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Base colors - Light theme matching chidi-web-client */
+  --background: oklch(0.995 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.965 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.965 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.965 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.91 0 0);
+  --input: oklch(0.91 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+
+  /* Chidi-specific design tokens */
+  --chidi-accent: oklch(0.205 0 0);
+  --chidi-accent-foreground: oklch(0.985 0 0);
+  --chidi-surface: oklch(0.975 0 0);
+  --chidi-surface-elevated: oklch(1 0 0);
+  --chidi-success: oklch(0.59 0.16 145);
+  --chidi-success-foreground: oklch(1 0 0);
+  --chidi-warning: oklch(0.75 0.18 55);
+  --chidi-warning-foreground: oklch(0.25 0 0);
+  --chidi-danger: oklch(0.577 0.245 27.325);
+  --chidi-danger-foreground: oklch(1 0 0);
+  --chidi-text-primary: oklch(0.145 0 0);
+  --chidi-text-secondary: oklch(0.45 0 0);
+  --chidi-text-muted: oklch(0.55 0 0);
+  --chidi-border-subtle: oklch(0.93 0 0);
+  --chidi-border-default: oklch(0.88 0 0);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Chidi tokens exposed to Tailwind */
+  --color-chidi-accent: var(--chidi-accent);
+  --color-chidi-accent-foreground: var(--chidi-accent-foreground);
+  --color-chidi-surface: var(--chidi-surface);
+  --color-chidi-surface-elevated: var(--chidi-surface-elevated);
+  --color-chidi-success: var(--chidi-success);
+  --color-chidi-success-foreground: var(--chidi-success-foreground);
+  --color-chidi-warning: var(--chidi-warning);
+  --color-chidi-warning-foreground: var(--chidi-warning-foreground);
+  --color-chidi-danger: var(--chidi-danger);
+  --color-chidi-danger-foreground: var(--chidi-danger-foreground);
+  --color-chidi-text-primary: var(--chidi-text-primary);
+  --color-chidi-text-secondary: var(--chidi-text-secondary);
+  --color-chidi-text-muted: var(--chidi-text-muted);
+  --color-chidi-border-subtle: var(--chidi-border-subtle);
+  --color-chidi-border-default: var(--chidi-border-default);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Landing page animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes floatingOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translate(10%, -10%) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-5%, 15%) scale(0.95);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(-10%, -5%) scale(1.05);
+    opacity: 0.55;
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-scale-in {
+  animation: fadeScaleIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float-soft {
+  animation: floatSoft 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--chidi-accent) 0%,
+    oklch(0.35 0 0) 50%,
+    var(--chidi-accent) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-gradient-shift {
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.animate-floating-orb {
+  animation: floatingOrb 20s ease-in-out infinite;
+}
+
+/* Section styling */
+.section-padding {
+  @apply px-6 py-20 md:py-28 lg:py-32;
+}
+
+.section-padding-sm {
+  @apply px-6 py-16 md:py-20;
+}
+
+/* Container */
+.container-marketing {
+  @apply max-w-6xl mx-auto;
+}
+
+/* Typography scale */
+.heading-hero {
+  @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08];
+}
+
+.heading-section {
+  @apply text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight;
+}
+
+.heading-feature {
+  @apply text-lg sm:text-xl font-semibold;
+}
+
+.body-large {
+  @apply text-lg sm:text-xl leading-relaxed;
+}
+
+.body-default {
+  @apply text-base leading-relaxed;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl 
+         bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)] 
+         transition-all duration-300 
+         hover:shadow-xl hover:shadow-black/10 hover:scale-[1.02] 
+         active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl 
+         bg-transparent text-[var(--chidi-text-primary)] border-2 border-[var(--chidi-border-default)]
+         transition-all duration-300 
+         hover:bg-[var(--chidi-surface)] hover:border-[var(--chidi-text-secondary)]
+         active:scale-[0.98];
+}
+
+/* Card styles */
+.card-feature {
+  @apply p-6 sm:p-8 rounded-2xl bg-white border border-[var(--chidi-border-subtle)]
+         transition-all duration-300 hover:shadow-lg hover:shadow-black/5 hover:-translate-y-1;
+}
+
+/* Highlighted section background */
+.section-highlighted {
+  @apply bg-gradient-to-b from-[var(--chidi-surface)] to-white;
+}
+
+/* Chat bubble styles for differentiator section */
+.chat-bubble {
+  @apply px-4 py-3 rounded-2xl text-sm sm:text-base max-w-[85%];
+}
+
+.chat-bubble-user {
+  @apply bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)] ml-auto rounded-br-md;
+}
+
+.chat-bubble-assistant {
+  @apply bg-[var(--chidi-surface)] text-[var(--chidi-text-primary)] mr-auto rounded-bl-md border border-[var(--chidi-border-subtle)];
+}
+
+/* Step indicator */
+.step-number {
+  @apply w-12 h-12 rounded-full bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)] 
+         flex items-center justify-center text-lg font-bold shrink-0;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
