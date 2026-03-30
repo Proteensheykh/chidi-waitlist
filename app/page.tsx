@@ -1,530 +1,421 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import {
-  MessageCircle,
-  Users,
-  ShoppingBag,
-  Package,
-  ArrowRight,
-  Check,
-  Sparkles,
-  Link as LinkIcon,
-  ClipboardList,
-  LayoutDashboard,
-} from "lucide-react";
-import Link from "next/link";
+import type React from "react"
+import { useState, useEffect } from "react"
+import { Header } from "@/components/header"
+import SmartSimpleBrilliant from "@/components/smart-simple-brilliant"
+import YourWorkInSync from "@/components/your-work-in-sync"
+import EffortlessIntegration from "@/components/effortless-integration-updated"
+import NumbersThatSpeak from "@/components/numbers-that-speak"
+import DocumentationSection from "@/components/documentation-section"
+import TestimonialsSection from "@/components/testimonials-section"
+import FAQSection from "@/components/faq-section"
+import CTASection from "@/components/cta-section"
+import FooterSection from "@/components/footer-section"
 
-// Chat questions for the differentiator section
-const CHAT_QUESTIONS = [
-  "How much did I sell this week?",
-  "Which products are running low?",
-  "Who are my top customers?",
-  "What was my revenue last month?",
-];
+function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
+  return (
+    <div className="px-[14px] py-[6px] bg-white shadow-[0px_0px_0px_4px_rgba(55,50,47,0.05)] overflow-hidden rounded-[90px] flex justify-start items-center gap-[8px] border border-[rgba(2,6,23,0.08)] shadow-xs">
+      <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
+      <div className="text-center flex justify-center flex-col text-[#37322F] text-xs font-medium leading-3 font-sans">
+        {text}
+      </div>
+    </div>
+  )
+}
 
-export default function HomePage() {
-  const [activeQuestion, setActiveQuestion] = useState(0);
+function FeatureCard({
+  title,
+  description,
+  isActive,
+  animationKey,
+  onClick,
+}: {
+  title: string
+  description: string
+  isActive: boolean
+  animationKey: number
+  onClick: () => void
+}) {
+  return (
+    <div
+      className={`w-full md:flex-1 self-stretch overflow-hidden flex flex-col justify-start items-start cursor-pointer transition-all duration-300 ${
+        isActive
+          ? "bg-white shadow-[0px_0px_0px_0.75px_#E0DEDB_inset]"
+          : "border-l-0 border-r-0 md:border border-[#E0DEDB]/80"
+      }`}
+      onClick={onClick}
+    >
+      <div
+        className={`w-full h-0.5 bg-[rgba(50,45,43,0.08)] overflow-hidden ${isActive ? "opacity-100" : "opacity-0"}`}
+      >
+        <div
+          key={animationKey}
+          className="h-0.5 bg-[#322D2B] animate-[progressBar_5s_linear_forwards] will-change-transform"
+        />
+      </div>
+      <div className="px-6 py-5 flex flex-col gap-2">
+        <div className="self-stretch flex justify-center flex-col text-[#49423D] text-sm md:text-sm font-semibold leading-6 md:leading-6 font-sans">
+          {title}
+        </div>
+        <div className="self-stretch text-[#605A57] text-[13px] md:text-[13px] font-normal leading-[22px] md:leading-[22px] font-sans">
+          {description}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function LandingPage() {
+  const [activeCard, setActiveCard] = useState(0)
+  const [animationKey, setAnimationKey] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % 3)
+      setAnimationKey((prev) => prev + 1)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleCardClick = (index: number) => {
+    setActiveCard(index)
+    setAnimationKey((prev) => prev + 1)
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[var(--chidi-border-subtle)]">
-        <div className="container-marketing px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-[var(--chidi-text-primary)]">
-            Chidi
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              href="#demo"
-              className="hidden sm:inline-flex text-sm font-medium text-[var(--chidi-text-secondary)] hover:text-[var(--chidi-text-primary)] transition-colors"
-            >
-              Request a demo
-            </Link>
-            <Link
-              href="https://chidi-web-client-git-ui-facelift-mo-hammed.vercel.app/auth"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)] transition-all hover:shadow-lg hover:shadow-black/10 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Get started
-            </Link>
-          </div>
-        </div>
-      </nav>
+    <>
+      <Header />
 
-      {/* SECTION 1: HERO */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        {/* Animated Background */}
-        <div className="absolute inset-0 z-0">
-          <div
-            className="absolute inset-0 animate-gradient-shift"
-            style={{
-              background:
-                "linear-gradient(-45deg, #fafafa, #f5f5f0, #faf8f5, #f8f8f8, #f5f0e8)",
-              backgroundSize: "400% 400%",
-            }}
-          />
-          {/* Floating orbs */}
-          <div
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-amber-200/25 to-orange-100/15 blur-3xl animate-floating-orb"
-            style={{ animationDelay: "0s" }}
-          />
-          <div
-            className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-stone-200/35 to-neutral-100/25 blur-3xl animate-floating-orb"
-            style={{ animationDelay: "-5s" }}
-          />
-          <div
-            className="absolute top-1/2 right-1/3 w-[350px] h-[350px] rounded-full bg-gradient-to-br from-emerald-100/20 to-teal-50/15 blur-3xl animate-floating-orb"
-            style={{ animationDelay: "-10s" }}
-          />
-          {/* Subtle dot pattern */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `radial-gradient(circle, #d4d4d4 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
-        </div>
+      <div className="w-full min-h-screen relative bg-[#F7F5F3] overflow-x-hidden flex flex-col justify-start items-center">
+        <div className="relative flex flex-col justify-start items-center w-full">
+          {/* Main container with proper margins */}
+          <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] relative flex flex-col justify-start items-start min-h-screen">
+            {/* Left vertical line */}
+            <div className="w-[1px] h-full absolute left-4 sm:left-6 md:left-8 lg:left-0 top-0 bg-[rgba(55,50,47,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
 
-        <div className="relative z-10 container-marketing px-6 py-20 text-center">
-          <h1
-            className="heading-hero text-[var(--chidi-text-primary)] mb-6 animate-fade-scale-in"
-            style={{ animationDelay: "0ms" }}
-          >
-            Turn social media conversations
-            <br className="hidden sm:block" />
-            <span className="relative">
-              into organised sales.
-            </span>
-          </h1>
+            {/* Right vertical line */}
+            <div className="w-[1px] h-full absolute right-4 sm:right-6 md:right-8 lg:right-0 top-0 bg-[rgba(55,50,47,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
 
-          <p
-            className="body-large text-[var(--chidi-text-secondary)] max-w-2xl mx-auto mb-10 animate-fade-slide-up"
-            style={{ animationDelay: "200ms" }}
-          >
-            Manage chats, customers, orders and stock in one place, and ask your
-            business questions whenever you need clarity.
-          </p>
-
-          <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-slide-up"
-            style={{ animationDelay: "400ms" }}
-          >
-            <Link href="https://chidi-web-client-git-ui-facelift-mo-hammed.vercel.app/auth" className="btn-primary">
-              Get started
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            <Link href="#demo" className="btn-secondary">
-              Request a demo
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: WHO IT IS FOR */}
-      <section className="section-padding bg-white">
-        <div className="container-marketing text-center">
-          <h2
-            className="heading-section text-[var(--chidi-text-primary)] mb-6"
-          >
-            Built for businesses that sell through conversations.
-          </h2>
-          <p className="body-large text-[var(--chidi-text-secondary)] max-w-2xl mx-auto">
-            If customers message you to buy, Chidi helps you organise everything
-            behind the scenes. From first message to completed order.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION 3: CORE CAPABILITIES */}
-      <section className="section-padding section-highlighted">
-        <div className="container-marketing">
-          <h2 className="heading-section text-[var(--chidi-text-primary)] text-center mb-14">
-            Everything your social sales need.
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Chats */}
-            <div className="card-feature group">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <MessageCircle className="w-7 h-7 text-emerald-600" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-2">
-                Chats
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Keep customer conversations organised and easy to follow.
-              </p>
-            </div>
-
-            {/* Customers */}
-            <div className="card-feature group">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Users className="w-7 h-7 text-blue-600" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-2">
-                Customers
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Store names, phone numbers and purchase history automatically.
-              </p>
-            </div>
-
-            {/* Orders and Sales */}
-            <div className="card-feature group">
-              <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <ShoppingBag className="w-7 h-7 text-amber-600" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-2">
-                Orders and Sales
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Record every order and track how your business is performing.
-              </p>
-            </div>
-
-            {/* Inventory */}
-            <div className="card-feature group">
-              <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Package className="w-7 h-7 text-purple-600" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-2">
-                Inventory
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Keep stock updated as sales happen.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: DIFFERENTIATOR */}
-      <section className="section-padding bg-[var(--chidi-surface)]">
-        <div className="container-marketing">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 text-amber-700 text-sm font-medium mb-6">
-                <Sparkles className="w-4 h-4" />
-                Ask your business anything
-              </div>
-              <h2 className="heading-section text-[var(--chidi-text-primary)] mb-6">
-                Talk to your business.
-              </h2>
-              <p className="body-large text-[var(--chidi-text-secondary)] mb-8">
-                Chidi keeps track of your customers, sales and inventory in the
-                background. When you need clarity, just ask:
-              </p>
-
-              {/* Question buttons */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {CHAT_QUESTIONS.map((question, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveQuestion(index)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      activeQuestion === index
-                        ? "bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)]"
-                        : "bg-white text-[var(--chidi-text-secondary)] border border-[var(--chidi-border-default)] hover:border-[var(--chidi-text-muted)]"
-                    }`}
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
-
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                You get clear, up to date answers. No reports to build. No
-                spreadsheets to check.
-              </p>
-            </div>
-
-            {/* Right: Chat UI Mock */}
-            <div className="relative">
-              <div className="bg-white rounded-3xl border border-[var(--chidi-border-subtle)] shadow-xl shadow-black/5 overflow-hidden">
-                {/* Chat header */}
-                <div className="px-5 py-4 border-b border-[var(--chidi-border-subtle)] flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[var(--chidi-accent)] flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">C</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[var(--chidi-text-primary)]">
-                      Chidi
-                    </p>
-                    <p className="text-xs text-[var(--chidi-text-muted)]">
-                      Your business assistant
-                    </p>
+            <div className="self-stretch pt-[9px] overflow-hidden border-b border-[rgba(55,50,47,0.06)] flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[66px] relative z-10">
+              {/* Hero Section */}
+              <div className="pt-16 sm:pt-20 md:pt-24 lg:pt-[216px] pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0">
+                <div className="w-full max-w-[937px] lg:w-[937px] flex flex-col justify-center items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+                  <div className="self-stretch rounded-[3px] flex flex-col justify-center items-center gap-4 sm:gap-5 md:gap-6 lg:gap-8">
+                    <div className="w-full max-w-[748.71px] lg:w-[748.71px] text-center flex justify-center flex-col text-[#37322F] text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-normal leading-[1.1] sm:leading-[1.15] md:leading-[1.2] lg:leading-24 font-serif px-2 sm:px-4 md:px-0">
+                      Run your entire business
+                      <br />
+                      through chat
+                    </div>
+                    <div className="w-full max-w-[506.08px] lg:w-[506.08px] text-center flex justify-center flex-col text-[rgba(55,50,47,0.80)] text-sm sm:text-base md:text-lg leading-[1.5] sm:leading-[1.55] md:leading-[1.6] lg:leading-7 font-sans px-2 sm:px-4 md:px-0 font-normal">
+                      Manage customers, track orders, and close sales across WhatsApp and Telegram — all in one place.
+                      No spreadsheets. No switching apps. No chaos.
+                    </div>
                   </div>
                 </div>
 
-                {/* Chat messages */}
-                <div className="p-5 space-y-4 min-h-[280px]">
-                  {/* User question */}
-                  <div
-                    key={activeQuestion}
-                    className="chat-bubble chat-bubble-user animate-slide-in-right"
-                  >
-                    {CHAT_QUESTIONS[activeQuestion]}
-                  </div>
-
-                  {/* Assistant response */}
-                  <div
-                    className="chat-bubble chat-bubble-assistant animate-slide-in-right"
-                    style={{ animationDelay: "300ms" }}
-                  >
-                    {activeQuestion === 0 && (
-                      <>
-                        You sold <strong>₦847,500</strong> this week across{" "}
-                        <strong>23 orders</strong>. That's 12% higher than last
-                        week! 📈
-                      </>
-                    )}
-                    {activeQuestion === 1 && (
-                      <>
-                        <strong>3 products</strong> are running low:
-                        <br />• Blue Ankara Dress (2 left)
-                        <br />• Leather Handbag (1 left)
-                        <br />• Wireless Earbuds (3 left)
-                      </>
-                    )}
-                    {activeQuestion === 2 && (
-                      <>
-                        Your top 3 customers this month:
-                        <br />
-                        1. <strong>Amara O.</strong> – ₦125,000
-                        <br />
-                        2. <strong>Kwame A.</strong> – ₦98,500
-                        <br />
-                        3. <strong>Fatima B.</strong> – ₦87,200
-                      </>
-                    )}
-                    {activeQuestion === 3 && (
-                      <>
-                        Last month's revenue: <strong>₦3,245,000</strong>
-                        <br />
-                        Total orders: <strong>89</strong>
-                        <br />
-                        Average order value: <strong>₦36,460</strong>
-                      </>
-                    )}
+                <div className="w-full max-w-[497px] lg:w-[497px] flex flex-col justify-center items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative z-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+                  <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
+                    <a
+                      href="https://my.chidi.app/auth?tab=signup"
+                      className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#37322F] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center hover:bg-[#2A2520] transition-colors"
+                    >
+                      <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+                      <div className="flex flex-col justify-center text-white text-sm sm:text-base md:text-[15px] font-medium leading-5 font-sans">
+                        Get Started
+                      </div>
+                    </a>
                   </div>
                 </div>
-              </div>
 
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-200/40 to-orange-100/30 rounded-full blur-2xl" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-emerald-100/40 to-teal-50/30 rounded-full blur-2xl" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: HOW IT WORKS */}
-      <section className="section-padding bg-white">
-        <div className="container-marketing">
-          <h2 className="heading-section text-[var(--chidi-text-primary)] text-center mb-6">
-            Simple setup. Structured selling.
-          </h2>
-          <p className="body-large text-[var(--chidi-text-secondary)] text-center max-w-xl mx-auto mb-14">
-            Get started in minutes and bring order to your social sales.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {/* Step 1 */}
-            <div className="text-center md:text-left">
-              <div className="step-number mx-auto md:mx-0 mb-5">
-                <LinkIcon className="w-5 h-5" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-3">
-                Connect your social sales channels
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Link WhatsApp, Instagram, or wherever you sell through
-                conversations.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="text-center md:text-left">
-              <div className="step-number mx-auto md:mx-0 mb-5">
-                <ClipboardList className="w-5 h-5" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-3">
-                Capture orders directly from conversations
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                Turn chat messages into tracked orders with a few taps.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="text-center md:text-left">
-              <div className="step-number mx-auto md:mx-0 mb-5">
-                <LayoutDashboard className="w-5 h-5" />
-              </div>
-              <h3 className="heading-feature text-[var(--chidi-text-primary)] mb-3">
-                Manage your sales and get answers in one place
-              </h3>
-              <p className="body-default text-[var(--chidi-text-secondary)]">
-                See everything clearly. Ask questions. Stay in control.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-center text-[var(--chidi-text-muted)] font-medium mt-12">
-            No switching between tools.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION 6: BENEFITS */}
-      <section className="section-padding section-highlighted">
-        <div className="container-marketing">
-          <h2 className="heading-section text-[var(--chidi-text-primary)] text-center mb-14">
-            Run your business with clarity.
-          </h2>
-
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
-            {[
-              "Never lose track of a sale.",
-              "Know who your customers are.",
-              "See what you have sold.",
-              "Stay organised as you grow.",
-            ].map((benefit, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-4 p-5 rounded-xl bg-white border border-[var(--chidi-border-subtle)]"
-              >
-                <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                  <Check className="w-5 h-5 text-emerald-600" />
+                <div className="absolute top-[232px] sm:top-[248px] md:top-[264px] lg:top-[320px] left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
+                  <img
+                    src="/mask-group-pattern.svg"
+                    alt=""
+                    className="w-[936px] sm:w-[1404px] md:w-[2106px] lg:w-[2808px] h-auto opacity-30 sm:opacity-40 md:opacity-50 mix-blend-multiply"
+                    style={{
+                      filter: "hue-rotate(15deg) saturate(0.7) brightness(1.2)",
+                    }}
+                  />
                 </div>
-                <p className="text-[var(--chidi-text-primary)] font-medium">
-                  {benefit}
-                </p>
-              </div>
-            ))}
-          </div>
 
-          <p className="text-center body-large text-[var(--chidi-text-secondary)]">
-            Chidi supports you so you can focus on selling.
-          </p>
-        </div>
-      </section>
+                <div className="w-full max-w-[960px] lg:w-[960px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
+                  <div className="w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_0px_0px_0.9056603908538818px_rgba(0,0,0,0.08)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
+                    {/* Dashboard Content */}
+                    <div className="self-stretch flex-1 flex justify-start items-start">
+                      {/* Main Content */}
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="relative w-full h-full overflow-hidden">
+                          {/* Product Image 1 - Conversation Management */}
+                          <div
+                            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                              activeCard === 0 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
+                            }`}
+                          >
+                            <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+                              <div className="text-center text-[#605A57] p-8">
+                                <div className="text-6xl mb-4">💬</div>
+                                <div className="text-lg font-medium">Smart Conversations</div>
+                                <div className="text-sm opacity-70">Reply instantly to customer questions</div>
+                              </div>
+                            </div>
+                          </div>
 
-      {/* SECTION 7: SCALABILITY */}
-      <section className="section-padding-sm bg-white">
-        <div className="container-marketing text-center">
-          <h2 className="heading-section text-[var(--chidi-text-primary)] mb-6">
-            Start simple. Grow confidently.
-          </h2>
-          <p className="body-large text-[var(--chidi-text-secondary)] max-w-xl mx-auto">
-            Begin with one channel. Expand as your business grows.
-            <br />
-            Chidi adapts to how you sell.
-          </p>
-        </div>
-      </section>
+                          {/* Product Image 2 - Orders & Payments */}
+                          <div
+                            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                              activeCard === 1 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
+                            }`}
+                          >
+                            <div className="w-full h-full bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center">
+                              <div className="text-center text-[#605A57] p-8">
+                                <div className="text-6xl mb-4">📦</div>
+                                <div className="text-lg font-medium">Orders & Payments</div>
+                                <div className="text-sm opacity-70">Turn chats into trackable orders</div>
+                              </div>
+                            </div>
+                          </div>
 
-      {/* SECTION 8: FINAL CTA */}
-      <section
-        id="demo"
-        className="section-padding bg-[var(--chidi-accent)] text-[var(--chidi-accent-foreground)]"
-      >
-        <div className="container-marketing text-center">
-          <h2 className="heading-section mb-6">
-            Bring order to your social sales.
-          </h2>
-          <p className="body-large opacity-80 mb-10 max-w-lg mx-auto">
-            Start using Chidi today.
-          </p>
-          <Link
-            href="https://chidi-web-client-git-ui-facelift-mo-hammed.vercel.app/auth"
-            className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-xl bg-white text-[var(--chidi-accent)] transition-all hover:shadow-xl hover:shadow-black/20 hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Get started
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
+                          {/* Product Image 3 - Inventory & Insights */}
+                          <div
+                            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+                              activeCard === 2 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
+                            }`}
+                          >
+                            <div className="w-full h-full bg-gradient-to-br from-emerald-50 to-teal-100 flex items-center justify-center">
+                              <div className="text-center text-[#605A57] p-8">
+                                <div className="text-6xl mb-4">📊</div>
+                                <div className="text-lg font-medium">Inventory & Insights</div>
+                                <div className="text-sm opacity-70">Track products and see your sales</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      {/* FOOTER */}
-      <footer className="bg-[var(--chidi-text-primary)] text-white/70 py-12">
-        <div className="container-marketing px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-8">
-              <Link
-                href="/"
-                className="text-xl font-bold text-white"
-              >
-                Chidi
-              </Link>
-              <div className="flex items-center gap-6 text-sm">
-                <Link
-                  href="/privacy"
-                  className="hover:text-white transition-colors"
+                <div className="self-stretch border-t border-[#E0DEDB] border-b border-[#E0DEDB] flex justify-center items-start">
+                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
+                    {/* Left decorative pattern */}
+                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
+                      {Array.from({ length: 50 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex-1 px-0 sm:px-2 md:px-0 flex flex-col md:flex-row justify-center items-stretch gap-0">
+                    <FeatureCard
+                      title="Smart conversations"
+                      description="Reply instantly to customer questions across WhatsApp, Instagram, and Telegram."
+                      isActive={activeCard === 0}
+                      animationKey={activeCard === 0 ? animationKey : 0}
+                      onClick={() => handleCardClick(0)}
+                    />
+                    <FeatureCard
+                      title="Orders & payments"
+                      description="Turn chats into trackable orders. Know who paid and who hasn't."
+                      isActive={activeCard === 1}
+                      animationKey={activeCard === 1 ? animationKey : 0}
+                      onClick={() => handleCardClick(1)}
+                    />
+                    <FeatureCard
+                      title="Inventory & insights"
+                      description="Track products, sizes, stock levels — see your sales in real time."
+                      isActive={activeCard === 2}
+                      animationKey={activeCard === 2 ? animationKey : 0}
+                      onClick={() => handleCardClick(2)}
+                    />
+                  </div>
+
+                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
+                    {/* Right decorative pattern */}
+                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
+                      {Array.from({ length: 50 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bento Grid Section */}
+                <div
+                  id="features"
+                  className="w-full border-b border-[rgba(55,50,47,0.12)] flex flex-col justify-center items-center"
                 >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="/terms"
-                  className="hover:text-white transition-colors"
-                >
-                  Terms & Conditions
-                </Link>
+                  {/* Header Section */}
+                  <div className="self-stretch px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] py-8 sm:py-12 md:py-16 border-b border-[rgba(55,50,47,0.12)] flex justify-center items-center gap-6">
+                    <div className="w-full max-w-[616px] lg:w-[616px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(50,45,43,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
+                      <Badge
+                        icon={
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect x="1" y="1" width="4" height="4" stroke="#37322F" strokeWidth="1" fill="none" />
+                            <rect x="7" y="1" width="4" height="4" stroke="#37322F" strokeWidth="1" fill="none" />
+                            <rect x="1" y="7" width="4" height="4" stroke="#37322F" strokeWidth="1" fill="none" />
+                            <rect x="7" y="7" width="4" height="4" stroke="#37322F" strokeWidth="1" fill="none" />
+                          </svg>
+                        }
+                        text="Core Features"
+                      />
+                      <div className="w-full max-w-[598.06px] lg:w-[598.06px] text-center flex justify-center flex-col text-[#49423D] text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
+                        Everything your business needs
+                      </div>
+                      <div className="self-stretch text-center text-[#605A57] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
+                        From conversations to conversions, Chidi handles it all
+                        <br />
+                        so you can focus on what matters most.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bento Grid Content */}
+                  <div className="self-stretch flex justify-center items-start">
+                    <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
+                      {/* Left decorative pattern */}
+                      <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
+                        {Array.from({ length: 200 }).map((_, i) => (
+                          <div
+                            key={i}
+                            className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-r border-[rgba(55,50,47,0.12)]">
+                      {/* Top Left - All conversations, one inbox */}
+                      <div className="border-b border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                        <div className="flex flex-col gap-2">
+                          <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
+                            All conversations, one inbox
+                          </h3>
+                          <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
+                            WhatsApp, Instagram, and Telegram messages unified in a single, beautifully organized
+                            interface.
+                          </p>
+                        </div>
+                        <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
+                          <SmartSimpleBrilliant
+                            width="100%"
+                            height="100%"
+                            theme="light"
+                            className="scale-50 sm:scale-65 md:scale-75 lg:scale-90"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Top Right - AI that responds instantly */}
+                      <div className="border-b border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                        <div className="flex flex-col gap-2">
+                          <h3 className="text-[#37322F] font-semibold leading-tight font-sans text-lg sm:text-xl">
+                            AI that responds instantly
+                          </h3>
+                          <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
+                            Smart replies powered by AI keep your customers engaged while you focus on growing your
+                            business.
+                          </p>
+                        </div>
+                        <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden text-right items-center justify-center">
+                          <YourWorkInSync
+                            width="400"
+                            height="250"
+                            theme="light"
+                            className="scale-60 sm:scale-75 md:scale-90"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bottom Left - Connect your platforms */}
+                      <div className="border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
+                        <div className="flex flex-col gap-2">
+                          <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
+                            Connect your platforms
+                          </h3>
+                          <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
+                            WhatsApp, Instagram, Telegram, and more. All your customer touchpoints connected
+                            seamlessly.
+                          </p>
+                        </div>
+                        <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
+                          <div className="w-full h-full flex items-center justify-center bg-transparent">
+                            <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full" />
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
+                        </div>
+                      </div>
+
+                      {/* Bottom Right - Track every sale */}
+                      <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                        <div className="flex flex-col gap-2">
+                          <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
+                            Track every sale
+                          </h3>
+                          <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
+                            Monitor customer interactions, sales trends, and revenue growth with real-time insights.
+                          </p>
+                        </div>
+                        <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden items-center justify-center relative">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <NumbersThatSpeak
+                              width="100%"
+                              height="100%"
+                              theme="light"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
+                      {/* Right decorative pattern */}
+                      <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
+                        {Array.from({ length: 200 }).map((_, i) => (
+                          <div
+                            key={i}
+                            className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Documentation Section */}
+                <DocumentationSection />
+
+                {/* Testimonials Section */}
+                <TestimonialsSection />
+
+                {/* FAQ Section */}
+                <FAQSection />
+
+                {/* CTA Section */}
+                <CTASection />
+
+                {/* Footer Section */}
+                <FooterSection />
               </div>
             </div>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="https://twitter.com/thechidiway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="Follow us on X (Twitter)"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com/thechidiway"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                aria-label="Follow us on Instagram"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-8 pt-8 border-t border-white/10 text-center text-sm">
-            <p>© {new Date().getFullYear()} Chidi. All rights reserved.</p>
-            <p className="mt-1">
-              Contact:{" "}
-              <a
-                href="mailto:admin@chidi.app"
-                className="hover:text-white transition-colors"
-              >
-                admin@chidi.app
-              </a>
-            </p>
           </div>
         </div>
-      </footer>
-    </div>
-  );
+      </div>
+    </>
+  )
 }
