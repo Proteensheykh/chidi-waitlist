@@ -84,7 +84,7 @@ export default function FooterSection() {
                 href="https://my.chidi.app/auth?tab=signup"
                 className="text-[#49423D] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#37322F] transition-colors"
               >
-                Get Started
+                Try Chidi now
               </a>
             </div>
           </div>

@@ -26,9 +26,9 @@ export default function DocumentationSection() {
       gradient: "from-blue-50 to-blue-100",
     },
     {
-      title: "Speaks your customers' language",
+      title: "If you can chat, you can run it",
       description:
-        "Multi-language AI that understands local dialects and cultural context. Respond naturally in English, French, Swahili, Yoruba, and more.",
+        "No dashboards to learn, no integrations to configure, no setup wizards. Just talk to Chidi the way you'd talk to a smart shop assistant — and it does the rest.",
       gradient: "from-purple-50 to-purple-100",
     },
     {

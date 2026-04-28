@@ -88,8 +88,14 @@ export default function PrivacyPage() {
 
             <Section title="3. Messaging Platform Integrations">
               <p>
-                When you connect a supported platform (e.g., WhatsApp Business
-                or Instagram) with Chidi:
+                At launch, Chidi integrates with Telegram. Additional platforms
+                (WhatsApp Business, Instagram) will be added as their
+                integrations are completed and will be governed by this same
+                policy.
+              </p>
+              <p>
+                When you connect a supported platform (e.g., Telegram, or in the
+                future WhatsApp Business or Instagram) with Chidi:
               </p>
               <ul>
                 <li>

@@ -20,24 +20,25 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Chidi — Run Your Entire Business Through Chat",
   description:
-    "Manage customers, track orders, and close sales across WhatsApp and Telegram — all in one place. No spreadsheets. No switching apps. No chaos.",
+    "Chidi is the AI assistant that runs your business through chat. Manage customers, orders, and inventory just by asking — and sell 24/7 through your Telegram self-service channel. WhatsApp & Instagram coming very soon.",
   keywords: [
     "social selling",
-    "WhatsApp business",
+    "Telegram store",
     "Telegram business",
-    "Instagram sales",
+    "AI sales assistant",
+    "AI for small business",
     "order management",
     "customer management",
     "inventory tracking",
     "small business",
-    "conversational commerce",
+    "self-service commerce",
     "chat commerce",
   ],
   authors: [{ name: "Chidi" }],
   openGraph: {
     title: "Chidi — Run Your Entire Business Through Chat",
     description:
-      "Manage customers, track orders, and close sales across WhatsApp and Telegram — all in one place.",
+      "Chidi is the AI assistant that runs your business through chat. Manage customers, orders, and inventory just by asking — and sell 24/7 through your Telegram self-service channel. WhatsApp & Instagram coming very soon.",
     type: "website",
     locale: "en_US",
     siteName: "Chidi",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chidi — Run Your Entire Business Through Chat",
     description:
-      "Manage customers, track orders, and close sales across WhatsApp and Telegram — all in one place.",
+      "Chidi is the AI assistant that runs your business through chat. Manage customers, orders, and inventory just by asking — and sell 24/7 through your Telegram self-service channel. WhatsApp & Instagram coming very soon.",
   },
 };
 

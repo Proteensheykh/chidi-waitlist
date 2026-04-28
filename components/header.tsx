@@ -72,7 +72,7 @@ export function Header() {
               href="https://my.chidi.app/auth?tab=signup"
               className="h-9 px-4 sm:px-6 bg-[#37322f] hover:bg-[#37322f]/90 text-white rounded-full font-medium text-sm inline-flex items-center justify-center transition-colors"
             >
-              Get Started
+              Try Chidi now
             </a>
           </div>
 
@@ -110,7 +110,7 @@ export function Header() {
                   href="https://my.chidi.app/auth?tab=signup"
                   className="w-full h-10 bg-[#37322f] hover:bg-[#37322f]/90 text-white rounded-full font-medium text-sm inline-flex items-center justify-center transition-colors"
                 >
-                  Get Started
+                  Try Chidi now
                 </a>
               </div>
             </div>

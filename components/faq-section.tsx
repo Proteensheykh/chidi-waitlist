@@ -11,12 +11,17 @@ const faqData: FAQItem[] = [
   {
     question: "What is Chidi and who is it for?",
     answer:
-      "Chidi is an AI business assistant for social sellers who run their businesses through WhatsApp, Instagram, and Telegram. Perfect for fashion brands, boutiques, tech gadget stores, beauty vendors, retail businesses, and service providers.",
+      "Chidi is an AI business assistant for social sellers. You manage customers, orders, and inventory just by chatting with Chidi. We also give your business a self-service Telegram channel where customers browse, ask, and order on their own — perfect for fashion brands, boutiques, beauty vendors, and retail.",
+  },
+  {
+    question: "Do you support WhatsApp and Instagram?",
+    answer:
+      "Telegram is our launch channel — we're going live with it now. WhatsApp Business and Instagram integrations are actively in the works and shipping very soon. They'll plug into the same Chidi you already know, so your customers, inventory, and orders carry over automatically.",
   },
   {
     question: "How does Chidi handle my customer conversations?",
     answer:
-      "Chidi connects to your WhatsApp, Instagram, and Telegram, bringing all messages into one unified inbox. Our AI automatically responds to customer questions, tracks orders, and maintains full context of every conversation.",
+      "Chidi powers a Telegram channel for your business that automatically answers questions, takes orders, and keeps full context of every customer — so nothing slips through, even after hours.",
   },
   {
     question: "Can Chidi really help me track sales and orders?",
@@ -36,7 +41,7 @@ const faqData: FAQItem[] = [
   {
     question: "How quickly can I get started?",
     answer:
-      "In minutes! Sign up, connect your WhatsApp, Instagram, or Telegram, upload or connect your inventory, and Chidi immediately begins organizing your conversations and helping you sell automatically.",
+      "In minutes. Sign up, connect your Telegram channel, upload your inventory, and Chidi starts answering customers and tracking orders right away.",
   },
 ]
 

@@ -24,7 +24,7 @@ export default function TestimonialsSection() {
     },
     {
       quote:
-        "Managing WhatsApp and Instagram in one place is a game-changer. Chidi keeps track of every customer interaction so I never miss an opportunity.",
+        "Having a Telegram channel that answers customers and tracks orders automatically has changed how I run my store — I sleep at night now.",
       name: "Fatima Hassan",
       company: "Founder, FreshFit Nutrition",
       image: "/placeholder.svg",

@@ -109,13 +109,13 @@ export default function LandingPage() {
                       through chat
                     </div>
                     <div className="w-full max-w-[506.08px] lg:w-[506.08px] text-center flex justify-center flex-col text-[rgba(55,50,47,0.80)] text-sm sm:text-base md:text-lg leading-[1.5] sm:leading-[1.55] md:leading-[1.6] lg:leading-7 font-sans px-2 sm:px-4 md:px-0 font-normal">
-                      Manage customers, track orders, and close sales across WhatsApp and Telegram — all in one place.
-                      No spreadsheets. No switching apps. No chaos.
+                      Manage customers, track orders and inventory — and sell on autopilot through your Telegram
+                      self-service channel. No spreadsheets. No switching apps. No chaos.
                     </div>
                   </div>
                 </div>
 
-                <div className="w-full max-w-[497px] lg:w-[497px] flex flex-col justify-center items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative z-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+                <div className="w-full max-w-[497px] lg:w-[497px] flex flex-col justify-center items-center gap-4 sm:gap-5 md:gap-6 relative z-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
                   <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
                     <a
                       href="https://my.chidi.app/auth?tab=signup"
@@ -123,9 +123,12 @@ export default function LandingPage() {
                     >
                       <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                       <div className="flex flex-col justify-center text-white text-sm sm:text-base md:text-[15px] font-medium leading-5 font-sans">
-                        Get Started
+                        Try Chidi now
                       </div>
                     </a>
+                  </div>
+                  <div className="text-center text-[rgba(55,50,47,0.60)] text-xs sm:text-sm font-medium leading-5 font-sans">
+                    Launching with Telegram. WhatsApp & Instagram coming very soon.
                   </div>
                 </div>
 
@@ -213,7 +216,7 @@ export default function LandingPage() {
                   <div className="flex-1 px-0 sm:px-2 md:px-0 flex flex-col md:flex-row justify-center items-stretch gap-0">
                     <FeatureCard
                       title="Smart conversations"
-                      description="Reply instantly to customer questions across WhatsApp, Instagram, and Telegram."
+                      description="Your Telegram channel answers customer questions instantly with AI — even at 2 a.m."
                       isActive={activeCard === 0}
                       animationKey={activeCard === 0 ? animationKey : 0}
                       onClick={() => handleCardClick(0)}
@@ -298,15 +301,15 @@ export default function LandingPage() {
                     </div>
 
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-r border-[rgba(55,50,47,0.12)]">
-                      {/* Top Left - All conversations, one inbox */}
+                      {/* Top Left - Every customer, remembered */}
                       <div className="border-b border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                            All conversations, one inbox
+                            Every customer, remembered
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            WhatsApp, Instagram, and Telegram messages unified in a single, beautifully organized
-                            interface.
+                            Every chat, order, and detail lives in one timeline per customer. Pick up exactly where you
+                            left off — even months later.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
@@ -319,15 +322,15 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      {/* Top Right - AI that responds instantly */}
+                      {/* Top Right - Replies that feel human, at machine speed */}
                       <div className="border-b border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] font-semibold leading-tight font-sans text-lg sm:text-xl">
-                            AI that responds instantly
+                            Replies that feel human, at machine speed
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            Smart replies powered by AI keep your customers engaged while you focus on growing your
-                            business.
+                            Chidi answers product questions, qualifies leads, and books orders the moment they come in —
+                            so customers don't wait and you don't lose sales to slow responses.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden text-right items-center justify-center">
@@ -340,15 +343,15 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      {/* Bottom Left - Connect your platforms */}
+                      {/* Bottom Left - Built for every channel */}
                       <div className="border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                            Connect your platforms
+                            Built for every channel. Telegram first.
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            WhatsApp, Instagram, Telegram, and more. All your customer touchpoints connected
-                            seamlessly.
+                            Spin up your AI-powered Telegram channel today. WhatsApp Business and Instagram coming very
+                            soon — same Chidi, more reach. Your customers, inventory, and orders follow you across all of them.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
@@ -359,14 +362,15 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      {/* Bottom Right - Track every sale */}
+                      {/* Bottom Right - Know what's working */}
                       <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                            Track every sale
+                            Know what's working
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            Monitor customer interactions, sales trends, and revenue growth with real-time insights.
+                            Sales, customers, products, and inventory — all tracked in real time as orders flow through
+                            Chidi. See what's selling, what's running low, and who's coming back.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden items-center justify-center relative">

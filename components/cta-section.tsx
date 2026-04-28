@@ -40,7 +40,7 @@ export default function CTASection() {
               >
                 <div className="w-44 h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                 <div className="flex flex-col justify-center text-white text-[13px] font-medium leading-5 font-sans">
-                  Get Started
+                  Try Chidi now
                 </div>
               </a>
             </div>
