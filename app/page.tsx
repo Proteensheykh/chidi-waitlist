@@ -216,7 +216,7 @@ export default function LandingPage() {
                   <div className="flex-1 px-0 sm:px-2 md:px-0 flex flex-col md:flex-row justify-center items-stretch gap-0">
                     <FeatureCard
                       title="Smart conversations"
-                      description="Your Telegram channel answers customer questions instantly with AI — even at 2 a.m."
+                      description="Your AI shop assistant answers customer questions instantly 24/7."
                       isActive={activeCard === 0}
                       animationKey={activeCard === 0 ? animationKey : 0}
                       onClick={() => handleCardClick(0)}
