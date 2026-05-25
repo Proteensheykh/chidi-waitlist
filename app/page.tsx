@@ -93,18 +93,19 @@ export default function LandingPage() {
                     </div>
 
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-r border-[rgba(55,50,47,0.12)]">
-                      {/* Top Left - Every customer, remembered */}
+                      {/* Top Left - In-app Chidi AI assistant */}
                       <Reveal
                         delay={0}
                         className="border-b border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6"
                       >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                            Every customer, remembered
+                            In-app Chidi AI assistant
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            Every chat, order, and detail lives in one timeline per customer. Pick up exactly where you
-                            left off — even months later.
+                            Ask Chidi what is happening across your shop and what to do next. It uses live inventory,
+                            orders, customers, and conversations to answer business questions, spot issues, and suggest
+                            clear next steps without manual searching.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
@@ -141,18 +142,19 @@ export default function LandingPage() {
                         </div>
                       </Reveal>
 
-                      {/* Bottom Left - Built for every channel */}
+                      {/* Bottom Left - Ready-to-share shop link */}
                       <Reveal
                         delay={160}
                         className="border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent"
                       >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                            Built for every channel. Telegram first.
+                            A shop link customers can browse
                           </h3>
                           <p className="text-[#605A57] text-sm md:text-base font-normal leading-relaxed font-sans">
-                            Spin up your AI-powered Telegram channel today. WhatsApp Business and Instagram coming very
-                            soon — same Chidi, more reach. Your customers, inventory, and orders follow you across all of them.
+                            Give customers one ready-to-share shop link for your products. They can browse items,
+                            variants, prices, and stock, then tap to order through WhatsApp or Telegram. Update products
+                            in Chidi once, and your public catalog stays current.
                           </p>
                         </div>
                         <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
