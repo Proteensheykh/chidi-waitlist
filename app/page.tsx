@@ -3,6 +3,7 @@
 import type React from "react"
 import { Header } from "@/components/header"
 import { HeroCarousel } from "@/components/hero-carousel"
+import { Reveal } from "@/components/reveal"
 import SmartSimpleBrilliant from "@/components/smart-simple-brilliant"
 import YourWorkInSync from "@/components/your-work-in-sync"
 import EffortlessIntegration from "@/components/effortless-integration-updated"
@@ -48,7 +49,7 @@ export default function LandingPage() {
                 >
                   {/* Header Section */}
                   <div className="self-stretch px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] py-8 sm:py-12 md:py-16 border-b border-[rgba(55,50,47,0.12)] flex justify-center items-center gap-6">
-                    <div className="w-full max-w-[616px] lg:w-[616px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(50,45,43,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
+                    <Reveal className="w-full max-w-[616px] lg:w-[616px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(50,45,43,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
                       <Badge
                         icon={
                           <svg
@@ -74,7 +75,7 @@ export default function LandingPage() {
                         <br />
                         so you can focus on what matters most.
                       </div>
-                    </div>
+                    </Reveal>
                   </div>
 
                   {/* Bento Grid Content */}
@@ -93,7 +94,10 @@ export default function LandingPage() {
 
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-r border-[rgba(55,50,47,0.12)]">
                       {/* Top Left - Every customer, remembered */}
-                      <div className="border-b border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                      <Reveal
+                        delay={0}
+                        className="border-b border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6"
+                      >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
                             Every customer, remembered
@@ -111,10 +115,13 @@ export default function LandingPage() {
                             className="scale-50 sm:scale-65 md:scale-75 lg:scale-90"
                           />
                         </div>
-                      </div>
+                      </Reveal>
 
                       {/* Top Right - Replies that feel human, at machine speed */}
-                      <div className="border-b border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                      <Reveal
+                        delay={80}
+                        className="border-b border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6"
+                      >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] font-semibold leading-tight font-sans text-lg sm:text-xl">
                             Replies that feel human, at machine speed
@@ -132,10 +139,13 @@ export default function LandingPage() {
                             className="scale-60 sm:scale-75 md:scale-90"
                           />
                         </div>
-                      </div>
+                      </Reveal>
 
                       {/* Bottom Left - Built for every channel */}
-                      <div className="border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
+                      <Reveal
+                        delay={160}
+                        className="border-r-0 md:border-r border-[rgba(55,50,47,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent"
+                      >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
                             Built for every channel. Telegram first.
@@ -151,10 +161,13 @@ export default function LandingPage() {
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
                         </div>
-                      </div>
+                      </Reveal>
 
                       {/* Bottom Right - Know what's working */}
-                      <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
+                      <Reveal
+                        delay={240}
+                        className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6"
+                      >
                         <div className="flex flex-col gap-2">
                           <h3 className="text-[#37322F] text-lg sm:text-xl font-semibold leading-tight font-sans">
                             Know what's working
@@ -175,7 +188,7 @@ export default function LandingPage() {
                           </div>
                           <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F7F5F3] to-transparent pointer-events-none"></div>
                         </div>
-                      </div>
+                      </Reveal>
                     </div>
 
                     <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">

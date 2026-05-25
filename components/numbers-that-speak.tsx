@@ -1,4 +1,6 @@
-import type React from "react"
+"use client"
+
+import { useEffect, useRef, useState, type CSSProperties, type FC } from "react"
 
 interface NumbersThatSpeakProps {
   width?: number | string
@@ -7,33 +9,86 @@ interface NumbersThatSpeakProps {
   theme?: "light" | "dark"
 }
 
-const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
+const NumbersThatSpeak: FC<NumbersThatSpeakProps> = ({
   width = 482,
   height = 300,
   className = "",
-  theme = "dark",
+  theme = "light",
 }) => {
-  const themeVars =
+  const themeVars: CSSProperties =
     theme === "light"
-      ? {
-          "--nts-surface": "#ffffff",
-          "--nts-text-primary": "#2f3037",
-          "--nts-text-secondary": "rgba(47,48,55,0.8)",
-          "--nts-text-muted": "rgba(55,50,47,0.7)",
-          "--nts-border": "rgba(47,48,55,0.12)",
-          "--nts-shadow": "rgba(47,48,55,0.06)",
-        }
+      ? ({
+          "--nts-surface": "var(--card)",
+          "--nts-text-primary": "var(--chidi-text-primary)",
+          "--nts-text-secondary": "var(--chidi-text-secondary)",
+          "--nts-text-muted": "var(--chidi-text-muted)",
+          "--nts-border": "var(--chidi-border-default)",
+        } as CSSProperties)
       : ({
-          "--nts-surface": "#ffffff",
-          "--nts-text-primary": "#2f3037",
-          "--nts-text-secondary": "rgba(47,48,55,0.8)",
-          "--nts-text-muted": "rgba(55,50,47,0.7)",
-          "--nts-border": "rgba(47,48,55,0.12)",
-          "--nts-shadow": "rgba(47,48,55,0.06)",
-        } as React.CSSProperties)
+          "--nts-surface": "var(--card)",
+          "--nts-text-primary": "var(--chidi-text-primary)",
+          "--nts-text-secondary": "var(--chidi-text-secondary)",
+          "--nts-text-muted": "var(--chidi-text-muted)",
+          "--nts-border": "var(--chidi-border-default)",
+        } as CSSProperties)
+
+  const TARGET = 317731
+  const heightsTarget = [83, 108, 58, 89, 83, 89, 83, 95, 108, 76, 89]
+
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [shown, setShown] = useState(false)
+  const [counter, setCounter] = useState(0)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) {
+      setShown(true)
+      setCounter(TARGET)
+      return
+    }
+
+    const node = ref.current
+    if (!node) return
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setShown(true)
+            obs.disconnect()
+            return
+          }
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    obs.observe(node)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shown) return
+
+    let raf = 0
+    const start = performance.now()
+    const duration = 1200
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setCounter(Math.round(TARGET * eased))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [shown])
 
   return (
     <div
+      ref={ref}
       className={className}
       style={
         {
@@ -42,10 +97,10 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
           position: "relative",
           background: "transparent",
           ...themeVars,
-        } as React.CSSProperties
+        } as CSSProperties
       }
       role="img"
-      aria-label="Financial dashboard showing invoiced revenue charts"
+      aria-label="Financial dashboard showing invoiced revenue chart"
     >
       <div
         style={{
@@ -70,14 +125,13 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
           }}
         >
           <div
-            className="border border-[rgba(0,0,0,0.08)]"
             style={{
               width: "270px",
               height: "199.565px",
               background: "var(--nts-surface)",
               borderRadius: "4.696px",
               boxShadow:
-                "0px 0px 0px 0.587px rgba(47,48,55,0.12), 0px 1.174px 2.348px -0.587px rgba(47,48,55,0.06), 0px 1.761px 3.522px -0.88px rgba(47,48,55,0.06)",
+                "0px 0px 0px 0.587px var(--nts-border), 0px 1.174px 2.348px -0.587px rgba(47,48,55,0.06), 0px 1.761px 3.522px -0.88px rgba(47,48,55,0.06)",
               overflow: "hidden",
             }}
           />
@@ -98,14 +152,13 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
           }}
         >
           <div
-            className="border border-[rgba(0,0,0,0.08)]"
             style={{
               width: "330px",
               height: "243.913px",
               background: "var(--nts-surface)",
               borderRadius: "5.739px",
               boxShadow:
-                "0px 0px 0px 0.717px rgba(47,48,55,0.12), 0px 1.435px 2.87px -0.717px rgba(47,48,55,0.06), 0px 2.152px 4.304px -1.076px rgba(47,48,55,0.06)",
+                "0px 0px 0px 0.717px var(--nts-border), 0px 1.435px 2.87px -0.717px rgba(47,48,55,0.06), 0px 2.152px 4.304px -1.076px rgba(47,48,55,0.06)",
               overflow: "hidden",
             }}
           />
@@ -126,14 +179,13 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
           }}
         >
           <div
-            className="border border-[rgba(0,0,0,0.08)]"
             style={{
               width: "360px",
               height: "266.087px",
               background: "var(--nts-surface)",
               borderRadius: "6.261px",
               boxShadow:
-                "0px 0px 0px 0.783px rgba(47,48,55,0.12), 0px 1.565px 3.13px -0.783px rgba(47,48,55,0.06), 0px 2.348px 4.696px -1.174px rgba(47,48,55,0.06)",
+                "0px 0px 0px 0.783px var(--nts-border), 0px 1.565px 3.13px -0.783px rgba(47,48,55,0.06), 0px 2.348px 4.696px -1.174px rgba(47,48,55,0.06)",
               overflow: "hidden",
               padding: "18.783px",
               boxSizing: "border-box",
@@ -145,26 +197,27 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
             <div style={{ marginBottom: "18.783px" }}>
               <div
                 style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "var(--font-inter)",
                   fontWeight: 600,
                   fontSize: "10.174px",
                   lineHeight: "18.783px",
                   color: "var(--nts-text-secondary)",
                 }}
               >
-                Invoiced Revenue
+                Invoiced revenue
               </div>
               <div
                 style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "18.783px",
-                  lineHeight: "20.348px",
-                  letterSpacing: "-0.587px",
+                  fontFamily: "var(--font-instrument-serif)",
+                  fontWeight: 400,
+                  fontSize: "24px",
+                  lineHeight: "1.05",
+                  letterSpacing: "-0.02em",
                   color: "var(--nts-text-primary)",
+                  fontVariantNumeric: "tabular-nums",
                 }}
               >
-                $317,731.00
+                ₦{counter.toLocaleString("en-NG")}
               </div>
             </div>
 
@@ -186,7 +239,7 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                     <div
                       key={index}
                       style={{
-                        fontFamily: "Inter, sans-serif",
+                        fontFamily: "var(--font-inter)",
                         fontWeight: 500,
                         fontSize: "7.826px",
                         color: "var(--nts-text-muted)",
@@ -210,8 +263,15 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                       position: "relative",
                     }}
                   >
-                    {[0, 1, 2, 3, 4].map((_, i) => (
-                      <div key={i} style={{ height: "1px", backgroundColor: "rgba(0,0,0,0.05)", width: "100%" }} />
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        style={{
+                          height: "1px",
+                          backgroundColor: "var(--chidi-border-subtle)",
+                          width: "100%",
+                        }}
+                      />
                     ))}
 
                     {/* Bars */}
@@ -228,14 +288,16 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                         padding: "0 10px",
                       }}
                     >
-                      {[83, 108, 58, 89, 83, 89, 83, 95, 108, 76, 89].map((height, index) => (
+                      {heightsTarget.map((height, index) => (
                         <div
                           key={index}
                           style={{
                             width: "12px",
-                            height: `${height}px`,
-                            backgroundColor: "#5D4E37",
+                            height: shown ? `${height}px` : "0px",
+                            backgroundColor: "var(--chidi-text-primary)",
                             borderRadius: "2px",
+                            transition: "height 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+                            transitionDelay: shown ? `${index * 60}ms` : "0ms",
                           }}
                         />
                       ))}
@@ -248,14 +310,14 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                       display: "flex",
                       justifyContent: "space-between",
                       paddingTop: "4px",
-                      fontFamily: "Inter, sans-serif",
+                      fontFamily: "var(--font-inter)",
                       fontWeight: 500,
                       fontSize: "7.826px",
                       color: "var(--nts-text-muted)",
                     }}
                   >
-                    <span>Aug 2023</span>
-                    <span>Aug 2024</span>
+                    <span>Aug 2025</span>
+                    <span>Aug 2026</span>
                   </div>
                 </div>
               </div>
