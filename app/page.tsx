@@ -109,7 +109,7 @@ export default function LandingPage() {
                       through chat
                     </div>
                     <div className="w-full max-w-[506.08px] lg:w-[506.08px] text-center flex justify-center flex-col text-[rgba(55,50,47,0.80)] text-sm sm:text-base md:text-lg leading-[1.5] sm:leading-[1.55] md:leading-[1.6] lg:leading-7 font-sans px-2 sm:px-4 md:px-0 font-normal">
-                      Manage customers, track orders and inventory — and sell on autopilot through your Telegram
+                      Manage customers, track orders and inventory and sell on autopilot through your Telegram
                       self-service channel. No spreadsheets. No switching apps. No chaos.
                     </div>
                   </div>
