@@ -8,7 +8,6 @@ import SmartSimpleBrilliant from "@/components/smart-simple-brilliant"
 import YourWorkInSync from "@/components/your-work-in-sync"
 import EffortlessIntegration from "@/components/effortless-integration-updated"
 import NumbersThatSpeak from "@/components/numbers-that-speak"
-import DocumentationSection from "@/components/documentation-section"
 import TestimonialsSection from "@/components/testimonials-section"
 import FAQSection from "@/components/faq-section"
 import CTASection from "@/components/cta-section"
@@ -206,9 +205,6 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Documentation Section */}
-                <DocumentationSection />
 
                 {/* Testimonials Section */}
                 <TestimonialsSection />

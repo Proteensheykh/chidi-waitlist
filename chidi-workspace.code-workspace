@@ -5,8 +5,8 @@
 			"path": "."
 		},
 		{
-			"name": "V0 Project",
-			"path": "../v0-project"
+			"name": "Chidi Web Client",
+			"path": "../chidi-client-demo/chidi-web-client2"
 		}
 	],
 	"settings": {
