@@ -195,7 +195,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           {/* Customer 1 */}
           <div className={`yws-fade ${shown1 ? 'in' : ''}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2 }}>
             <div style={{ background: customerBubble, color: textPrimary, borderRadius: 12, borderBottomLeftRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 220, border: '1px solid ' + borderSubtle }}>
-              The Ngozi maxi, can I exchange size?
+              Hi, good afternoon. Is the blue Ankara dress still available in medium?
             </div>
             <span style={{ fontSize: 8, color: textMuted, paddingLeft: 4 }}>08:38</span>
           </div>
@@ -214,7 +214,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           {/* Shop 1 + speed badge */}
           <div className={`yws-fade ${shown2 ? 'in' : ''}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2, position: 'relative' }}>
             <div style={{ background: shopBubble, color: shopBubbleText, borderRadius: 12, borderBottomRightRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 220 }}>
-              Let me check that for you — one moment.
+              Good afternoon. Yes, medium is available.
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4, paddingRight: 4 }}>
               <svg width="8" height="8" viewBox="0 0 24 24" fill="#22C55E" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
@@ -230,7 +230,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           {/* Shop 2 */}
           <div className={`yws-fade ${shown3 ? 'in' : ''}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
             <div style={{ background: shopBubble, color: shopBubbleText, borderRadius: 12, borderBottomRightRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 220 }}>
-              Yes, we have it. Want me to set one aside?
+              Would you like me to reserve one for you before it sells out?
             </div>
             <span style={{ fontSize: 8, color: textMuted, paddingRight: 4 }}>08:38</span>
           </div>
@@ -238,7 +238,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           {/* Customer 2 */}
           <div className={`yws-fade ${shown4 ? 'in' : ''}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2 }}>
             <div style={{ background: customerBubble, color: textPrimary, borderRadius: 12, borderBottomLeftRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 220, border: '1px solid ' + borderSubtle }}>
-              Yes please, I&apos;ll pay this evening.
+              Yes please. How do I pay?
             </div>
             <span style={{ fontSize: 8, color: textMuted, paddingLeft: 4 }}>11:08</span>
           </div>
@@ -247,7 +247,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           {shownSent && (
             <div className="yws-fade in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
               <div style={{ background: shopBubble, color: shopBubbleText, borderRadius: 12, borderBottomRightRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 240 }}>
-                Bank: GTBank 0123456789 — Onyema
+                No problem. I have reserved it for you. GTBank 0123456789 — Onyema
               </div>
               <span style={{ fontSize: 8, color: textMuted, paddingRight: 4 }}>11:09</span>
             </div>
@@ -274,10 +274,10 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 maxWidth: 150,
               }}
             >
-              Bank: GTBank 0123456789…
+              Reserve item + send payment details
             </span>
             <span style={{ fontSize: 9, fontWeight: 500, color: textPrimary, background: surface, padding: '3px 8px', borderRadius: 999, border: '1px solid ' + borderSubtle, whiteSpace: 'nowrap' }}>
-              Got it, che…
+              Share delivery options
             </span>
           </div>
         </div>
@@ -301,7 +301,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
               transition: 'background 240ms ease-out, color 240ms ease-out',
             }}
           >
-            {composerFilled ? 'Bank: GTBank 0123456789 — Onyema' : 'Type your reply…'}
+            {composerFilled ? 'No problem. I have reserved it for you. GTBank 0123456789 — Onyema' : 'Type your reply…'}
           </div>
           {/* Mic */}
           <div style={{ width: 26, height: 26, borderRadius: 999, background: surface, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid ' + borderSubtle, flexShrink: 0 }}>

@@ -13,7 +13,7 @@ interface ChidiAssistantQAProps {
   startDelay?: number
 }
 
-const QUERY = 'Which products are running low?'
+const QUERY = 'What should I focus on today?'
 
 const ShopAvatar: React.FC<{ size?: number }> = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 20 20" style={{ borderRadius: 4, overflow: 'hidden', flexShrink: 0 }}>
@@ -179,10 +179,10 @@ const ChidiAssistantQA: React.FC<ChidiAssistantQAProps> = ({
     }
   }, [shown])
 
-  const products = [
-    { name: 'Casual sneakers', meta: '2 left', image: '/casual-sneakers.png' },
-    { name: 'Leather handbag', meta: '1 left', image: '/leather-handbag.png' },
-    { name: 'Wireless earbuds', meta: '3 left', image: '/wireless-earbuds.png' },
+  const priorities = [
+    { name: 'Restock wireless earbuds', meta: 'only 3 left', image: '/wireless-earbuds.png' },
+    { name: 'Promote blue Ankara dress', meta: '12 customer asks', image: '/blue-ankara-dress.png' },
+    { name: 'Check pending orders', meta: '4 delivery updates', kind: 'orders' },
   ]
 
   const inChat = ['chat-user', 'chat-typing', 'chat-reply', 'chat-card', 'chat-hold'].includes(phase)
@@ -306,7 +306,7 @@ const ChidiAssistantQA: React.FC<ChidiAssistantQAProps> = ({
             {showReply && (
               <div className="caq-fade in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2 }}>
                 <div style={{ background: chidiBubble, color: chidiBubbleText, borderRadius: 12, borderBottomLeftRadius: 3, padding: '7px 11px', fontSize: 11, lineHeight: 1.4, maxWidth: 240, border: '1px solid ' + borderSubtle }}>
-                  Three products need attention this week.
+                  Start with these three things today.
                 </div>
                 <span style={{ fontSize: 8, color: textMuted, paddingLeft: 4 }}>11:08 · 0.4s</span>
               </div>
@@ -318,20 +318,30 @@ const ChidiAssistantQA: React.FC<ChidiAssistantQAProps> = ({
                 <div style={{ background: chidiBubble, border: '1px solid ' + borderSubtle, borderRadius: 12, borderBottomLeftRadius: 3, padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 5, maxWidth: 250, boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5, paddingBottom: 5, borderBottom: '1px solid ' + borderSubtle }}>
                     <Mark size={11} variant="default" />
-                    <span style={{ fontSize: 9.5, fontWeight: 700, color: textPrimary, letterSpacing: '-0.005em' }}>3 products need attention</span>
+                    <span style={{ fontSize: 9.5, fontWeight: 700, color: textPrimary, letterSpacing: '-0.005em' }}>Today&apos;s focus</span>
                   </div>
-                  {products.map((p) => (
+                  {priorities.map((p) => (
                     <div key={p.name} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                       <div style={{ width: 20, height: 20, borderRadius: 4, overflow: 'hidden', background: '#F4F0EA', flexShrink: 0, border: '1px solid ' + borderSubtle }}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        {'image' in p ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#EAF7EF' }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#047857" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                              <path d="M3 6h18" />
+                              <path d="M16 10a4 4 0 0 1-8 0" />
+                            </svg>
+                          </div>
+                        )}
                       </div>
                       <span style={{ fontSize: 9.5, fontWeight: 500, color: textPrimary, flex: 1, letterSpacing: '-0.003em' }}>{p.name}</span>
                       <span style={{ fontSize: 8.5, fontWeight: 600, color: '#BE5A24', background: 'rgba(190, 90, 36, 0.10)', padding: '1px 5px', borderRadius: 4 }}>{p.meta}</span>
                     </div>
                   ))}
                   <div style={{ marginTop: 2, padding: '5px 8px', borderRadius: 6, background: '#1F1B16', color: '#F4DDC2', fontSize: 9.5, fontWeight: 600, textAlign: 'center', letterSpacing: '-0.003em' }}>
-                    Restock all 3 →
+                    Show me why →
                   </div>
                 </div>
               </div>
