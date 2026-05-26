@@ -21,9 +21,8 @@ const CARDS: CardData[] = [
   {
     title: "Smart conversations",
     description: "Your AI shop assistant answers customer questions instantly, around the clock.",
-    image:
-      "https://images.pexels.com/photos/34523114/pexels-photo-34523114.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop",
-    alt: "Lagos merchant replying to customers from her stall",
+    image: "/hero-smart-conversations.jpg",
+    alt: "Lagos suya vendor at his stall checking customer messages on his phone",
     tint: "from-[#37322F]/60 via-[#37322F]/25 to-transparent",
     overlay: {
       icon: "💬",
@@ -35,9 +34,8 @@ const CARDS: CardData[] = [
   {
     title: "Orders & payments",
     description: "Turn chats into trackable orders. Know who paid and who hasn't.",
-    image:
-      "https://images.pexels.com/photos/8302335/pexels-photo-8302335.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop",
-    alt: "A merchant packaging an order for shipping",
+    image: "/hero-orders-payments.jpg",
+    alt: "Lagos market vendor smiling with a phone in hand, confirming an order",
     tint: "from-[#1F4023]/55 via-[#1F4023]/20 to-transparent",
     overlay: {
       icon: "✓",
@@ -49,9 +47,8 @@ const CARDS: CardData[] = [
   {
     title: "Inventory & insights",
     description: "Track products, sizes, stock levels. See what is selling in real time.",
-    image:
-      "https://images.pexels.com/photos/8655018/pexels-photo-8655018.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop",
-    alt: "Stack of colorful African wax print fabric",
+    image: "/hero-products-insights.jpg",
+    alt: "Lagos shop owner at her counter, surrounded by her product stock",
     tint: "from-[#C4956A]/55 via-[#C4956A]/20 to-transparent",
     overlay: {
       icon: "📈",
