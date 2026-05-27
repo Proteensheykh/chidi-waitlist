@@ -76,7 +76,7 @@ export default function FAQSection() {
             Frequently Asked Questions
           </div>
           <div className="w-full text-[#605A57] text-base font-normal leading-7 font-sans">
-            Everything you need to know about
+            Everything you need to know about{' '}
             <br className="hidden md:block" />
             running your business with Chidi.
           </div>
