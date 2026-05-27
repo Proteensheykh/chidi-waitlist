@@ -257,7 +257,7 @@ export default function TestimonialsSection() {
 
             <div className="flex-1 px-0 md:px-6 flex flex-col justify-start items-start gap-6">
               <div
-                className="self-stretch flex flex-col text-2xl md:text-[32px] font-medium leading-10 md:leading-[42px] font-sans h-[200px] md:h-[210px] overflow-hidden tracking-tight"
+                className="self-stretch flex flex-col text-2xl md:text-[32px] font-medium leading-10 md:leading-[42px] font-sans min-h-[160px] md:h-[210px] md:overflow-hidden tracking-tight"
                 style={{
                   color: INK,
                   filter: transitioning ? 'blur(4px)' : 'blur(0px)',
