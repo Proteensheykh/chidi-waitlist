@@ -181,9 +181,15 @@ export function HeroCarousel() {
               />
             </a>
           </div>
-          <p className="text-center text-[var(--chidi-text-muted)] text-[11px] font-medium uppercase tracking-[0.18em] leading-[1.4] font-sans">
-            Launching with Telegram. WhatsApp & Instagram coming very soon.
-          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--chidi-border-default)] bg-[var(--card)] shadow-[0px_0px_0px_4px_rgba(55,50,47,0.05)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]" />
+            </span>
+            <span className="text-[var(--chidi-text-secondary)] text-[11px] font-medium uppercase tracking-[0.18em] leading-[1.4] font-sans">
+              WhatsApp coming soon
+            </span>
+          </div>
         </div>
 
         <div
