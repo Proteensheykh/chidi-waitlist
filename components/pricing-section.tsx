@@ -95,7 +95,9 @@ function PlanCard({ plan }: { plan: Plan }) {
         <div className="self-stretch flex flex-col justify-start items-start gap-2">
           <div className="flex items-center gap-2.5">
             <div
-              className={`text-lg font-medium leading-7 font-sans ${hi ? "text-[#FBFAF9]" : "text-[rgba(55,50,47,0.90)]"}`}
+              className={`text-xl md:text-2xl font-semibold leading-7 tracking-tight font-sans ${
+                hi ? "text-[#FBFAF9]" : "text-[#37322F]"
+              }`}
             >
               {plan.name}
             </div>
