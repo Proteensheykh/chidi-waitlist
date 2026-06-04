@@ -36,6 +36,14 @@ export function Header() {
                 Features
               </a>
 
+              {/* Pricing Link */}
+              <a
+                href="#pricing"
+                className="text-[#37322f] hover:text-[#37322f]/80 text-sm font-medium"
+              >
+                Pricing
+              </a>
+
               {/* Resources Dropdown */}
               <div
                 className="relative"
@@ -89,6 +97,11 @@ export function Header() {
               {/* Features Link */}
               <a href="#features" className="text-[#37322f] font-medium text-sm">
                 Features
+              </a>
+
+              {/* Pricing Link */}
+              <a href="#pricing" className="text-[#37322f] font-medium text-sm">
+                Pricing
               </a>
 
               {/* Resources Section */}

@@ -4,6 +4,7 @@ import { BentoFeatures } from "@/components/bento-features"
 import { Header } from "@/components/header"
 import { HeroCarousel } from "@/components/hero-carousel"
 import TestimonialsSection from "@/components/testimonials-section"
+import PricingSection from "@/components/pricing-section"
 import FAQSection from "@/components/faq-section"
 import CTASection from "@/components/cta-section"
 import FooterSection from "@/components/footer-section"
@@ -29,6 +30,9 @@ export default function LandingPage() {
 
             {/* Testimonials Section */}
             <TestimonialsSection />
+
+            {/* Pricing Section */}
+            <PricingSection />
 
             {/* FAQ Section */}
             <FAQSection />
