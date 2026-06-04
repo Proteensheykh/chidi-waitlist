@@ -66,7 +66,7 @@ const plans: Plan[] = [
     name: "Soft Life",
     description: "For businesses that mean business.",
     price: "₦45,000",
-    valueNote: "Exactly what the plan says; “Soft life”.",
+    valueNote: "Exactly what the plan says: “Soft Life.”",
     cta: "Get Started",
     featuresPrefix: "Everything in Grow, plus:",
     features: [

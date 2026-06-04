@@ -30,9 +30,9 @@ export function BentoFeatures() {
             Everything your business needs
           </h2>
           <p className="self-stretch text-center text-[var(--chidi-text-secondary)] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
-            From conversations to conversions, Chidi handles it all
+            Chidi turns your chats into orders, your orders into insights,
             <br />
-            so you can focus on what matters most.
+            and your customers into regulars.
           </p>
         </Reveal>
       </div>
