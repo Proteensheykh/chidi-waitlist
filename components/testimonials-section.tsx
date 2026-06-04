@@ -96,14 +96,14 @@ const RAW_TESTIMONIALS: Omit<Testimonial, 'words'>[] = [
     company: 'Home Interior · Lagos',
     image: '/testimonial-zainab.jpg',
   },
-  {
-    slug: 'palesa',
-    quote:
-      'I spend money to bring people to my shop, so I hate wasting leads. Chidi welcomes them quickly, answers the first questions, and pushes more chats to orders.',
-    name: 'Palesa T.',
-    company: 'Activewear · Abuja',
-    image: '/testimonial-palesa.jpg',
-  },
+  // {
+  //   slug: 'palesa',
+  //   quote:
+  //     'I spend money to bring people to my shop, so I hate wasting leads. Chidi welcomes them quickly, answers the first questions, and pushes more chats to orders.',
+  //   name: 'Palesa T.',
+  //   company: 'Activewear · Abuja',
+  //   image: '/testimonial-palesa.jpg',
+  // },
   {
     slug: 'nnenna',
     quote:
