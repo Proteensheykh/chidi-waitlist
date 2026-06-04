@@ -27,26 +27,166 @@ function CheckIcon({ stroke }: { stroke: string }) {
   )
 }
 
-const starterFeatures = [
-  "Basic order capture",
-  "Limited AI-assisted replies",
-  "Automated order capture",
-  "Customer records",
-  "Up to 50 conversations/month",
-  "Email support",
+interface Plan {
+  name: string
+  description: string
+  price: string
+  valueNote: string
+  cta: string
+  featuresPrefix?: string
+  features: string[]
+  highlighted?: boolean
+  recommended?: boolean
+}
+
+const plans: Plan[] = [
+  {
+    name: "Side Hustle",
+    description: "For businesses exploring the Chidi way of doing things.",
+    price: "₦0",
+    valueNote: "Try the platform and experience the difference.",
+    cta: "Start for Free",
+    features: [
+      "Basic order capture",
+      "Limited AI-assisted replies",
+      "Automated order capture",
+      "Customer records",
+      "Up to 50 conversations/month",
+      "Email support",
+    ],
+  },
+  {
+    name: "Grow",
+    description: "For growing businesses that rely on chat to drive sales every day.",
+    price: "₦15,000",
+    valueNote: "A full-time assistant for less than ₦500 per day.",
+    cta: "Get Started",
+    highlighted: true,
+    recommended: true,
+    featuresPrefix: "Everything in Side Hustle, plus:",
+    features: [
+      "Unlimited conversations",
+      "Automated product enquiries",
+      "Inventory tracking",
+      "Payment status tracking",
+      "Customer CRM",
+      "Sales analytics",
+      "Repeat customer insights",
+      "Priority support",
+      "Early access to new features",
+    ],
+  },
+  {
+    name: "Soft Life",
+    description: "For businesses that mean business.",
+    price: "₦45,000",
+    valueNote: "Exactly what the plan says; “Soft life”.",
+    cta: "Get Started",
+    featuresPrefix: "Everything in Grow, plus:",
+    features: [
+      "Advanced customer segmentation",
+      "Automated follow-ups",
+      "Abandoned order recovery",
+      "Staff accounts",
+      "Advanced analytics beyond your business data",
+      "Dedicated onboarding",
+      "VIP support",
+      "Early access to new features",
+    ],
+  },
 ]
 
-const growthFeatures = [
-  "Unlimited conversations",
-  "Automated product enquiries",
-  "Inventory tracking",
-  "Payment status tracking",
-  "Customer CRM",
-  "Sales analytics",
-  "Repeat customer insights",
-  "Priority support",
-  "Early access to new features",
-]
+function PlanCard({ plan }: { plan: Plan }) {
+  const hi = plan.highlighted
+
+  return (
+    <div
+      className={`flex-1 self-stretch px-6 py-8 overflow-hidden flex flex-col justify-start items-start gap-12 border ${
+        hi ? "bg-[#37322F] border-[#37322F]" : "border-[rgba(55,50,47,0.12)]"
+      }`}
+    >
+      <div className="self-stretch flex flex-col justify-start items-start gap-9">
+        <div className="self-stretch flex flex-col justify-start items-start gap-2">
+          <div className="flex items-center gap-2.5">
+            <div
+              className={`text-lg font-medium leading-7 font-sans ${hi ? "text-[#FBFAF9]" : "text-[rgba(55,50,47,0.90)]"}`}
+            >
+              {plan.name}
+            </div>
+            {plan.recommended && (
+              <div className="px-2.5 py-0.5 rounded-full bg-[var(--chidi-win)]/15 border border-[var(--chidi-win)]/30">
+                <span className="text-[var(--chidi-win)] text-[10px] font-semibold uppercase tracking-[0.14em] leading-none font-sans">
+                  Recommended
+                </span>
+              </div>
+            )}
+          </div>
+          <div
+            className={`w-full max-w-[242px] text-sm font-normal leading-5 font-sans ${
+              hi ? "text-[#B2AEA9]" : "text-[rgba(41,37,35,0.70)]"
+            }`}
+          >
+            {plan.description}
+          </div>
+        </div>
+
+        <div className="self-stretch flex flex-col justify-start items-start gap-1.5">
+          <div className="flex items-end gap-1.5">
+            <span className={`text-5xl font-normal leading-none font-serif ${hi ? "text-[#F0EFEE]" : "text-[#37322F]"}`}>
+              {plan.price}
+            </span>
+            <span className={`text-sm font-medium font-sans pb-1 ${hi ? "text-[#D2C6BF]" : "text-[#847971]"}`}>
+              /month
+            </span>
+          </div>
+          <div className={`text-base md:text-lg font-semibold leading-6 font-sans ${hi ? "text-white" : "text-[#37322F]"}`}>
+            {plan.valueNote}
+          </div>
+        </div>
+
+        <a
+          href={SIGNUP_URL}
+          className={`self-stretch h-11 px-4 relative shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center transition-colors ${
+            hi ? "bg-[#FBFAF9] hover:bg-white" : "bg-[#37322F] hover:bg-[#2A2520]"
+          }`}
+        >
+          <div
+            className={`w-full h-full absolute left-0 top-0 bg-gradient-to-b ${
+              hi ? "from-[rgba(255,255,255,0)]" : "from-[rgba(255,255,255,0.20)]"
+            } to-[rgba(0,0,0,0.10)] mix-blend-multiply`}
+          ></div>
+          <span className={`relative text-[13px] font-medium leading-5 font-sans ${hi ? "text-[#37322F]" : "text-[#FBFAF9]"}`}>
+            {plan.cta}
+          </span>
+        </a>
+      </div>
+
+      <div className="self-stretch flex flex-col justify-start items-start gap-3">
+        {plan.featuresPrefix && (
+          <div
+            className={`text-[12.5px] font-medium leading-5 font-sans ${hi ? "text-white/80" : "text-[rgba(55,50,47,0.70)]"}`}
+          >
+            {plan.featuresPrefix}
+          </div>
+        )}
+        {plan.features.map((feature) => (
+          <div key={feature} className="self-stretch flex justify-start items-center gap-[13px]">
+            <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
+              <CheckIcon stroke={hi ? "var(--chidi-win)" : "#9CA3AF"} />
+            </div>
+            <div
+              className={`flex-1 text-[12.5px] font-normal leading-5 font-sans ${
+                hi ? "text-[#F0EFEE]" : "text-[rgba(55,50,47,0.80)]"
+              }`}
+            >
+              {feature}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function PricingSection() {
   return (
@@ -83,97 +223,9 @@ export default function PricingSection() {
           <GutterStrip count={200} />
 
           <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-6 md:gap-5">
-            {/* Starter */}
-            <div className="flex-1 self-stretch px-6 py-8 border border-[rgba(55,50,47,0.12)] overflow-hidden flex flex-col justify-start items-start gap-12">
-              <div className="self-stretch flex flex-col justify-start items-start gap-9">
-                <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-[rgba(55,50,47,0.90)] text-lg font-medium leading-7 font-sans">Starter</div>
-                  <div className="w-full max-w-[242px] text-[rgba(41,37,35,0.70)] text-sm font-normal leading-5 font-sans">
-                    For businesses exploring the Chidi way of doing things.
-                  </div>
-                </div>
-
-                <div className="self-stretch flex flex-col justify-start items-start gap-1.5">
-                  <div className="flex items-end gap-1.5">
-                    <span className="text-[#37322F] text-5xl font-normal leading-none font-serif">₦0</span>
-                    <span className="text-[#847971] text-sm font-medium font-sans pb-1">/month</span>
-                  </div>
-                  <div className="text-[#37322F] text-base md:text-lg font-semibold leading-6 font-sans">
-                    Try the platform and experience the difference.
-                  </div>
-                </div>
-
-                <a
-                  href={SIGNUP_URL}
-                  className="self-stretch h-11 px-4 relative bg-[#37322F] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center hover:bg-[#2A2520] transition-colors"
-                >
-                  <div className="w-full h-full absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <span className="relative text-[#FBFAF9] text-[13px] font-medium leading-5 font-sans">Start for Free</span>
-                </a>
-              </div>
-
-              <div className="self-stretch flex flex-col justify-start items-start gap-3">
-                {starterFeatures.map((feature) => (
-                  <div key={feature} className="self-stretch flex justify-start items-center gap-[13px]">
-                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
-                      <CheckIcon stroke="#9CA3AF" />
-                    </div>
-                    <div className="flex-1 text-[rgba(55,50,47,0.80)] text-[12.5px] font-normal leading-5 font-sans">
-                      {feature}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Growth (highlighted) */}
-            <div className="flex-1 self-stretch px-6 py-8 bg-[#37322F] border border-[#37322F] overflow-hidden flex flex-col justify-start items-start gap-12">
-              <div className="self-stretch flex flex-col justify-start items-start gap-9">
-                <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <div className="text-[#FBFAF9] text-lg font-medium leading-7 font-sans">Growth</div>
-                    <div className="px-2.5 py-0.5 rounded-full bg-[var(--chidi-win)]/15 border border-[var(--chidi-win)]/30">
-                      <span className="text-[var(--chidi-win)] text-[10px] font-semibold uppercase tracking-[0.14em] leading-none font-sans">
-                        Recommended
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-full max-w-[242px] text-[#B2AEA9] text-sm font-normal leading-5 font-sans">
-                    For growing businesses that rely on chat to drive sales every day.
-                  </div>
-                </div>
-
-                <div className="self-stretch flex flex-col justify-start items-start gap-1.5">
-                  <div className="flex items-end gap-1.5">
-                    <span className="text-[#F0EFEE] text-5xl font-normal leading-none font-serif">₦15,000</span>
-                    <span className="text-[#D2C6BF] text-sm font-medium font-sans pb-1">/month</span>
-                  </div>
-                  <div className="text-white text-base md:text-lg font-semibold leading-6 font-sans">
-                    A full-time assistant for less than ₦500 per day.
-                  </div>
-                </div>
-
-                <a
-                  href={SIGNUP_URL}
-                  className="self-stretch h-11 px-4 relative bg-[#FBFAF9] shadow-[0px_2px_4px_rgba(55,50,47,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center hover:bg-white transition-colors"
-                >
-                  <div className="w-full h-full absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <span className="relative text-[#37322F] text-[13px] font-medium leading-5 font-sans">Get Started</span>
-                </a>
-              </div>
-
-              <div className="self-stretch flex flex-col justify-start items-start gap-3">
-                <div className="text-white/80 text-[12.5px] font-medium leading-5 font-sans">Everything in Starter, plus:</div>
-                {growthFeatures.map((feature) => (
-                  <div key={feature} className="self-stretch flex justify-start items-center gap-[13px]">
-                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
-                      <CheckIcon stroke="var(--chidi-win)" />
-                    </div>
-                    <div className="flex-1 text-[#F0EFEE] text-[12.5px] font-normal leading-5 font-sans">{feature}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {plans.map((plan) => (
+              <PlanCard key={plan.name} plan={plan} />
+            ))}
           </div>
 
           <GutterStrip count={200} />
