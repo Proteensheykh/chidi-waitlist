@@ -30,7 +30,7 @@ export function Header() {
             <div className="hidden md:flex items-center space-x-6">
               {/* Features Link */}
               <a
-                href="#features"
+                href="/#features"
                 className="text-[#37322f] hover:text-[#37322f]/80 text-sm font-medium"
               >
                 Features
@@ -38,7 +38,7 @@ export function Header() {
 
               {/* Pricing Link */}
               <a
-                href="#pricing"
+                href="/#pricing"
                 className="text-[#37322f] hover:text-[#37322f]/80 text-sm font-medium"
               >
                 Pricing
@@ -56,6 +56,12 @@ export function Header() {
                 </button>
                 {resourcesOpen && (
                   <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#37322f]/10 py-2 z-50">
+                    <a
+                      href="/blog"
+                      className="block px-4 py-2 text-sm text-[#37322f] hover:bg-[#f7f5f3] transition-colors"
+                    >
+                      Blog
+                    </a>
                     <a
                       href="/privacy"
                       className="block px-4 py-2 text-sm text-[#37322f] hover:bg-[#f7f5f3] transition-colors"
@@ -95,12 +101,12 @@ export function Header() {
           <div className="md:hidden pb-4 border-t border-[#37322f]/10 mt-2 pt-4">
             <div className="flex flex-col space-y-4">
               {/* Features Link */}
-              <a href="#features" className="text-[#37322f] font-medium text-sm">
+              <a href="/#features" className="text-[#37322f] font-medium text-sm">
                 Features
               </a>
 
               {/* Pricing Link */}
-              <a href="#pricing" className="text-[#37322f] font-medium text-sm">
+              <a href="/#pricing" className="text-[#37322f] font-medium text-sm">
                 Pricing
               </a>
 
@@ -108,6 +114,9 @@ export function Header() {
               <div>
                 <div className="text-[#37322f] font-medium text-sm mb-2">Resources</div>
                 <div className="flex flex-col space-y-2 pl-4">
+                  <a href="/blog" className="text-[#37322f]/80 text-sm hover:text-[#37322f]">
+                    Blog
+                  </a>
                   <a href="/privacy" className="text-[#37322f]/80 text-sm hover:text-[#37322f]">
                     Privacy Policy
                   </a>
