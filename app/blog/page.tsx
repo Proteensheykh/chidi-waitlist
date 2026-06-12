@@ -31,12 +31,9 @@ export default function BlogPage() {
         </Link>
 
         <div className="mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--chidi-text-primary)] mb-3">
+          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--chidi-text-primary)]">
             Blog
           </h1>
-          <p className="text-[var(--chidi-text-secondary)] text-lg">
-            Insights on running your business through chat.
-          </p>
         </div>
 
         {posts.length === 0 ? (
