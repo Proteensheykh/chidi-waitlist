@@ -64,12 +64,12 @@ export default function BlogPage() {
                       />
                     </div>
                     <div className="p-6 sm:p-8">
-                      <time
-                        dateTime={post.frontmatter.publishedAt}
-                        className="text-sm text-[var(--chidi-text-muted)]"
-                      >
-                        {formatPublishedDate(post.frontmatter.publishedAt)}
-                      </time>
+                      <p className="text-sm text-[var(--chidi-text-muted)]">
+                        By {post.frontmatter.author ?? "Chidi Team"} ·{" "}
+                        <time dateTime={post.frontmatter.publishedAt}>
+                          {formatPublishedDate(post.frontmatter.publishedAt)}
+                        </time>
+                      </p>
                       <h2 className="mt-2 text-xl sm:text-2xl font-semibold text-[var(--chidi-text-primary)]">
                         {post.frontmatter.title}
                       </h2>

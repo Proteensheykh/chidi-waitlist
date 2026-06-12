@@ -87,8 +87,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     image: coverImageUrl,
     datePublished: post.frontmatter.publishedAt,
     author: {
-      "@type": "Organization",
-      name: "Chidi",
+      "@type": "Person",
+      name: post.frontmatter.author ?? "Chidi Team",
     },
     publisher: {
       "@type": "Organization",
@@ -131,6 +131,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="p-8 sm:p-12">
             <header className="mb-8 pb-8 border-b border-[var(--chidi-border-subtle)]">
               <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--chidi-text-muted)] mb-4">
+                <span>By {post.frontmatter.author ?? "Chidi Team"}</span>
+                <span aria-hidden="true">·</span>
                 <time dateTime={post.frontmatter.publishedAt}>
                   {formatPublishedDate(post.frontmatter.publishedAt)}
                 </time>

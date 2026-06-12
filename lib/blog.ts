@@ -10,6 +10,7 @@ export interface BlogPostFrontmatter {
   description: string;
   publishedAt: string;
   coverImage: string;
+  author?: string;
   draft?: boolean;
 }
 
